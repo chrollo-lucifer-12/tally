@@ -6,6 +6,7 @@ import Feature2 from "@/components/home/feature-2";
 import Feature3 from "@/components/home/feature-3";
 import Feature4 from "@/components/home/feature-4";
 import Feature5 from "@/components/home/feature-5/page";
+import Feature6 from "@/components/home/feature-6";
 
 const Page = () => {
     return <div>
@@ -17,6 +18,7 @@ const Page = () => {
         <Feature3/>
         <Feature4/>
         <Feature5/>
+        <Feature6/>
     </div>
 }
 
