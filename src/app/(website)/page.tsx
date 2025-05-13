@@ -8,6 +8,7 @@ import Feature4 from "@/components/home/feature-4";
 import Feature5 from "@/components/home/feature-5/page";
 import Feature6 from "@/components/home/feature-6";
 import QnaSection from "@/components/home/qna-section";
+import Footer from "@/components/home/footer";
 
 const Page = () => {
     return <div>
@@ -21,6 +22,7 @@ const Page = () => {
         <Feature5/>
         <Feature6/>
         <QnaSection/>
+        <Footer/>
     </div>
 }
 
