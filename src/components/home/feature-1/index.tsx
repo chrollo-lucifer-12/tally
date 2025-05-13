@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import {Lock} from "lucide-react";
+import ReviewCard from "@/components/home/review-card";
 
 const Feature1 = () => {
     return (
         <section className="mt-32 flex flex-col items-center  gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-            <div>
+            <div className={"w-[700px]"}>
                 <h1 className="text-black font-extrabold text-3xl">
                     A form builder like no other
                 </h1>
@@ -44,7 +45,7 @@ const Feature1 = () => {
                     </p>
                 </div>
             </div>
-
+            <ReviewCard review={`“Loving Tally! Not sure why I only started using it now, so good!”`} name={"Natan Castiel"} designation={"Head of Growth, Gelt"}/>
         </section>
     );
 };
