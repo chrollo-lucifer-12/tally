@@ -53,7 +53,6 @@ const Feature2 = () => {
             <h1 className={"mt-2 font-extrabold text-black"}>Build any form in seconds</h1>
             <p className={"text-xs text-black mt-1"}>Easily create online forms using our wide range of free input blocks. Collect contact info, files, signatures, payments, and much more. Build everything from surveys to quizzes to lead generation forms.</p>
             <Image src={"/input-badges.png"} alt={'input-badges'} width={100} height={100} className={"w-full"} />
-
         </div>
         <div className={"w-[700px] grid grid-cols-3"}>
             {
