@@ -11,6 +11,7 @@ import QnaSection from "@/components/home/qna-section";
 import Footer from "@/components/home/footer";
 
 const Page = () => {
+
     return <div>
         <Navbar/>
         <HeroBanner/>
