@@ -23,14 +23,83 @@ model Otp {
 }
 
 model User {
-  id           String    @id @default(nanoid())
-  firstname    String?
-  lastname     String?
-  email        String    @unique
-  password     String?
-  profileimage String?
-  verified     Boolean   @default(false)
-  googleId     String?   @unique
-  sessions     Session[]
-  otps         Otp[]
+  id                String             @id @default(nanoid())
+  firstname         String?
+  lastname          String?
+  email             String             @unique
+  password          String?
+  profileimage      String?
+  verified          Boolean            @default(false)
+  googleId          String?            @unique
+  sessions          Session[]
+  otps              Otp[]
+  userWorkspaceMaps UserWorkspaceMap[]
+  templates         Template[]
+  reviews           Review[]
+}
+
+model Workspace {
+  id                String             @id @default(nanoid(12))
+  name              String
+  userWorkspaceMaps UserWorkspaceMap[]
+  forms             Form[]
+}
+
+model UserWorkspaceMap {
+  id          String    @id @default(nanoid(12))
+  workspaceId String
+  userId      String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+model Form {
+  id          String     @id @default(nanoid(6))
+  workspaceId String     @unique
+  workspace   Workspace  @relation(fields: [workspaceId], references: [id])
+  title       String
+  isPublishes Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
+  questions   Question[]
+  template    Template?
+  inTrash     Boolean    @default(false)
+  reviews     Review[]
+}
+
+model Question {
+  id              String            @id @default(uuid())
+  title           String
+  type            String
+  options         String[]
+  formId          String
+  form            Form              @relation(fields: [formId], references: [id])
+  reviewSolutions ReviewSolutions[]
+}
+
+model Template {
+  id        String @id @default(nanoid(6))
+  formId    String @unique
+  form      Form   @relation(fields: [formId], references: [id])
+  creatorId String
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Review {
+  id             String            @id @default(uuid())
+  userId         String
+  user           User              @relation(fields: [userId], references: [id])
+  Form           Form              @relation(fields: [formId], references: [id])
+  formId         String
+  reviewSolutons ReviewSolutions[]
+}
+
+model ReviewSolutions {
+  id         String   @id @default(uuid())
+  reviewId   String
+  review     Review   @relation(fields: [reviewId], references: [id])
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id])
+  solutions  Int[]
 }
