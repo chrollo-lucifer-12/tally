@@ -14,3 +14,10 @@ export const CompleteInfoSchema = z.object({
         .regex(/[!@#$%^&*()\-_=+{};:,<.>]/, "Password must contain at least one special character"),
     email : z.string().email()
 })
+
+export const VerifyEmailSchema = z.object({
+    otp: z.string()
+        .min(6, { message: "OTP must be 6 digits" })
+        .max(6, { message: "OTP must be 6 digits" }),
+    email : z.string().email()
+});

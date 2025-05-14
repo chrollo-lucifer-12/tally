@@ -39,6 +39,13 @@ const AuthForm = ({type, serverAction, email} :AuthFormProps) => {
                 <CustomButton pending={pending}  type={"submit"} title={"Continue"} cn={"bg-black text-white hover:text-white hover:bg-gray-900"} />
             </form>
         }
+        case "verify": {
+            return <form action={action} className={"flex flex-col gap-y-4 mt-4"}>
+                <CustomInput name={"otp"} type={"password"} label={"Otp"} error={state?.errors?.otp}/>
+                <input type={"hidden"} name={"email"} value={email} />
+                <CustomButton pending={pending}  type={"submit"} title={"Continue"} cn={"bg-black text-white hover:text-white hover:bg-gray-900"} />
+            </form>
+        }
     }
 }
 
