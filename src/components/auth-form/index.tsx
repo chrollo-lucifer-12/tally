@@ -17,17 +17,17 @@ const AuthForm = ({type, serverAction, email} :AuthFormProps) => {
 
     const router = useRouter()
 
-    useEffect(() => {
-        if (state?.redirect) {
-            router.push(state?.redirect)
-        }
-    }, [state])
+
+    if (state?.redirect) {
+        router.push(state?.redirect)
+    }
 
     switch (type) {
         case "signup": {
             return <form action={action} className={"flex flex-col gap-y-4 mt-4"}>
                 <CustomInput name={"email"} type={"email"} label={"Email"} error={state?.errors?.email}/>
-                <CustomButton pending={pending}  type={"submit"} title={"Continue"} cn={"bg-black text-white hover:text-white hover:bg-gray-900"} />
+                <CustomButton pending={pending} type={"submit"} title={"Continue"}
+                              cn={"bg-black text-white hover:text-white hover:bg-gray-900"}/>
             </form>
         }
         case "complete": {
@@ -35,15 +35,17 @@ const AuthForm = ({type, serverAction, email} :AuthFormProps) => {
                 <CustomInput name={"firstname"} type={"text"} label={"First Name"} error={state?.errors?.firstname}/>
                 <CustomInput name={"lastname"} type={"text"} label={"Last Name"} error={state?.errors?.lastname}/>
                 <CustomInput name={"password"} type={"password"} label={"Password"} error={state?.errors?.password}/>
-                <input type={"hidden"} name={"email"} value={email} />
-                <CustomButton pending={pending}  type={"submit"} title={"Continue"} cn={"bg-black text-white hover:text-white hover:bg-gray-900"} />
+                <input type={"hidden"} name={"email"} value={email}/>
+                <CustomButton pending={pending} type={"submit"} title={"Continue"}
+                              cn={"bg-black text-white hover:text-white hover:bg-gray-900"}/>
             </form>
         }
         case "verify": {
             return <form action={action} className={"flex flex-col gap-y-4 mt-4"}>
                 <CustomInput name={"otp"} type={"password"} label={"Otp"} error={state?.errors?.otp}/>
-                <input type={"hidden"} name={"email"} value={email} />
-                <CustomButton pending={pending}  type={"submit"} title={"Continue"} cn={"bg-black text-white hover:text-white hover:bg-gray-900"} />
+                <input type={"hidden"} name={"email"} value={email}/>
+                <CustomButton pending={pending} type={"submit"} title={"Continue"}
+                              cn={"bg-black text-white hover:text-white hover:bg-gray-900"}/>
             </form>
         }
     }

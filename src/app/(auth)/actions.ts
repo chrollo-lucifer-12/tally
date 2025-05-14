@@ -3,6 +3,7 @@
 import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema, FormState} from "@/lib/definitions";
 import {prisma} from "@/lib/db"
 import emailjs from '@emailjs/browser';
+import {Session} from "@prisma/client";
 
 emailjs.init(process.env.PUBLIC_KEY!);
 
@@ -166,3 +167,51 @@ export const GenerateOtp = async (email : string) => {
     }
 }
 
+export const CreateSession = async (session : Session) => {
+    try {
+        await prisma.session.create({
+            data: session
+        });
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export const FindSession = async (sessionId : string) => {
+    try {
+       const result = await prisma.session.findUnique({
+            where: {
+                id: sessionId
+            },
+            include: {
+                user: true
+            }
+        });
+       return result
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export const DeleteSession = async (sessionId : string) => {
+    try {
+        await prisma.session.delete({ where: { id: sessionId } });
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const UpdateSession = async (sessionId : string, expiresAt : Date) => {
+    try {
+        await prisma.session.update({
+            where: {
+                id: sessionId
+            },
+            data: {
+                expiresAt: expiresAt
+            }
+        });
+    } catch (e) {
+        console.log(e);
+    }
+}

@@ -8,9 +8,10 @@ datasource db {
 }
 
 model Session {
-  id     String @id @default(uuid())
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  userId    String
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Otp {
