@@ -3,7 +3,6 @@
 import {useForm} from "@/hooks/useForm";
 import CustomInput from "@/components/custom-input";
 import CustomButton from "@/components/custom-button";
-import {useEffect} from "react";
 import {useRouter} from "next/navigation";
 
 interface AuthFormProps {
@@ -44,6 +43,15 @@ const AuthForm = ({type, serverAction, email} :AuthFormProps) => {
             return <form action={action} className={"flex flex-col gap-y-4 mt-4"}>
                 <CustomInput name={"otp"} type={"password"} label={"Otp"} error={state?.errors?.otp}/>
                 <input type={"hidden"} name={"email"} value={email}/>
+                <CustomButton pending={pending} type={"submit"} title={"Continue"}
+                              cn={"bg-black text-white hover:text-white hover:bg-gray-900"}/>
+            </form>
+        }
+
+        case "login": {
+            return <form action={action} className={"flex flex-col gap-y-4 mt-4"}>
+                <CustomInput name={"email"} type={"email"} label={"Email"} error={state?.errors?.email}/>
+                <CustomInput name={"password"} type={"password"} label={"Password"} error={state?.errors?.password}/>
                 <CustomButton pending={pending} type={"submit"} title={"Continue"}
                               cn={"bg-black text-white hover:text-white hover:bg-gray-900"}/>
             </form>

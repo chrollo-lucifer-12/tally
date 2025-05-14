@@ -22,7 +22,7 @@ const CompleteProfilePage = async ({searchParams} : {searchParams : Promise<{ema
     }
 
     return <div className={"w-full max-w-[280px]"}>
-        <FormHeader/>
+        <FormHeader signup/>
         <AuthForm type={"complete"} serverAction={CompleteInfoAction} email={email}/>
     </div>
 }

@@ -1,9 +1,12 @@
 "use server"
 
-import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema, FormState} from "@/lib/definitions";
+import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema, FormState, LoginSchema} from "@/lib/definitions";
 import {prisma} from "@/lib/db"
 import emailjs from '@emailjs/browser';
 import {Session} from "@prisma/client";
+import {createSession, generateSessionToken} from "@/lib/session";
+import {setSessionTokenCookie} from "@/lib/cookie";
+import {hash, compare} from "bcrypt"
 
 emailjs.init(process.env.PUBLIC_KEY!);
 
@@ -50,6 +53,67 @@ export const SignupAction = async (state : FormState, formData : FormData) => {
     }
 }
 
+export const LoginAction = async (state : FormState, formData : FormData) => {
+    const validatedFields = LoginSchema.safeParse({
+        email : formData.get("email"),
+        password : formData.get("password")
+    })
+
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+        }
+    }
+
+    const {password, email} = validatedFields.data
+
+    try {
+        const userExists = await prisma.user.findUnique({where : {email}})
+
+        if (!userExists) {
+            return {
+                errors : {
+                    email : "This email doesn't exist"
+                }
+            }
+        }
+
+        if (!userExists.verified) {
+            return {
+                redirect : `/verify?email=${userExists.email}`
+            }
+        }
+
+        if (!userExists.firstname) {
+            return {
+                redirect : `/complete-profile?email=${userExists.email}`
+            }
+        }
+
+        const matchPassword = await compare(password, userExists.password!)
+
+        if (!matchPassword) {
+            return {
+                errors : {
+                    email : "Wrong password"
+                }
+            }
+        }
+        const token = generateSessionToken()
+        await createSession(token, userExists.id)
+        await setSessionTokenCookie(token, new Date(Date.now() + 30 * 24 * 60 * 60 * 1000))
+
+        return {
+            redirect :
+                "/dashboard"
+
+        }
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 export const CompleteInfoAction = async (state : FormState, formData : FormData) => {
     const validatedFields = CompleteInfoSchema.safeParse({
         firstname : formData.get("firstname"),
@@ -68,14 +132,28 @@ export const CompleteInfoAction = async (state : FormState, formData : FormData)
     const {firstname,lastname,password,email} = validatedFields.data
 
     try {
+
+        const findUser = await prisma.user.findUnique({where : {email}});
+
+        const hashedPassword = await hash(password, 10);
+
         await prisma.user.update({
             where : {email},
             data : {
                 firstname,
                 lastname,
-                password
+                password : hashedPassword
             }
         })
+
+        const token = generateSessionToken()
+        await createSession(token, findUser!.id)
+        await setSessionTokenCookie(token, new Date(Date.now() + 30 * 24 * 60 * 60 * 1000))
+
+
+        return {
+            redirect : "/dashboard0"
+        }
     } catch (e) {
         console.log(e);
     }
