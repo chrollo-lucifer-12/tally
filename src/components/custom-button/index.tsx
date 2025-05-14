@@ -37,7 +37,7 @@ const CustomButton = ({ src, title, cn, type = "button", pending, href }: Custom
                         ) : (
                             <>
                                 {src && <Image src={src} alt="icon" width={20} height={20} />}
-                                <p className="text-[12px]">{title}</p>
+                                <p className="text-[12px] w-fit">{title}</p>
                             </>
                         )}
                     </div>

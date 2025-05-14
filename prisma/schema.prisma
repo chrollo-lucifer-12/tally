@@ -36,6 +36,7 @@ model User {
   userWorkspaceMaps UserWorkspaceMap[]
   templates         Template[]
   reviews           Review[]
+  forms             Form[]
 }
 
 model Workspace {
@@ -65,6 +66,8 @@ model Form {
   template    Template?
   inTrash     Boolean    @default(false)
   reviews     Review[]
+  user        User?      @relation(fields: [userId], references: [id])
+  userId      String?
 }
 
 model Question {

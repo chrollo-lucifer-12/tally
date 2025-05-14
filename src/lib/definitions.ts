@@ -25,6 +25,12 @@ export const LoginSchema = z.object({
     email : z.string().email()
 })
 
+export type Form = {
+    id: string
+    title: string
+    updatedAt: Date
+}
+
 export type FormState =
     | {
     errors?: {
