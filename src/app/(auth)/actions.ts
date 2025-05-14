@@ -2,8 +2,9 @@
 
 import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema, FormState} from "@/lib/definitions";
 import {prisma} from "@/lib/db"
-import { Resend } from 'resend';
-const resend = new Resend(process.env.RESEND_KEY);
+import emailjs from '@emailjs/browser';
+
+emailjs.init(process.env.PUBLIC_KEY!);
 
 export const SignupAction = async (state : FormState, formData : FormData) => {
 
@@ -149,12 +150,17 @@ export const GenerateOtp = async (email : string) => {
             },
         });
 
-        await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
-            to: [email],
-            subject: 'Account Verification',
-            html: `<p>Otp for Verification <strong>${otp}</strong></p>`
-        });
+        const templateParams = {
+            email,
+            otp,
+        };
+
+        await emailjs.send(
+            process.env.SERVICE_ID!,
+            process.env.TEMPLATE_ID!,
+            templateParams
+        );
+
     } catch (e) {
         console.log(e);
     }
