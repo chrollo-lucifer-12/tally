@@ -1,20 +1,34 @@
 "use client"
 
 interface CustomInputProps {
-    name : string
-    label ?: string
-    type : "email"
+    name: string
+    label?: string
+    type: string
     placeholder?: string
-    cn ?: string
+    cn?: string
+    error ?: string
 }
 
-const CustomInput = ({label, name, placeholder, type, cn} : CustomInputProps) => {
-    return <div className={"flex flex-col gap-y-1"}>
-        {
-            label && <label htmlFor={name} className={"text-black font-semibold text-xs"}>{label}</label>
-        }
-        <input id={name} name={name} type={type} placeholder={placeholder} className={`border-[1px] border-gray-5 rounded-[8px] text-black  pl-[0.9em] pr-[0.9em] pt-1 pb-1 hover:shadow-xs transition duration-200 ${cn}`} />
-    </div>
+const CustomInput = ({label, name, placeholder, type, error, cn = ""}: CustomInputProps) => {
+    return (
+        <div className="flex flex-col gap-y-1">
+            {
+                label && <label htmlFor={name} className="text-black font-semibold text-xs">{label}</label>
+            }
+            <input
+                id={name}
+                name={name}
+                type={type}
+                placeholder={placeholder}
+                className={`border border-gray-300 font-light h-[32px] text-[14px] rounded-lg text-black px-3 py-1
+                           focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-300
+                           hover:shadow-sm transition duration-200 ${cn}`}
+            />
+            {
+                error && <p  className="text-red-800 text-[10px]">{error}</p>
+            }
+        </div>
+    )
 }
 
 export default CustomInput
