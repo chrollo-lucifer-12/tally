@@ -30,6 +30,7 @@ model User {
   password     String?
   profileimage String?
   verified     Boolean   @default(false)
+  googleId     String?   @unique
   sessions     Session[]
   otps         Otp[]
 }

@@ -152,7 +152,7 @@ export const CompleteInfoAction = async (state : FormState, formData : FormData)
 
 
         return {
-            redirect : "/dashboard0"
+            redirect : "/dashboard"
         }
     } catch (e) {
         console.log(e);
@@ -293,3 +293,4 @@ export const UpdateSession = async (sessionId : string, expiresAt : Date) => {
         console.log(e);
     }
 }
+
