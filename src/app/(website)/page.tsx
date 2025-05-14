@@ -9,8 +9,16 @@ import Feature5 from "@/components/home/feature-5/page";
 import Feature6 from "@/components/home/feature-6";
 import QnaSection from "@/components/home/qna-section";
 import Footer from "@/components/home/footer";
+import {getCurrentSession} from "@/lib/cookie";
+import {redirect} from "next/navigation";
 
-const Page = () => {
+const Page = async () => {
+
+    const {session} = await getCurrentSession()
+
+    if (session) {
+        redirect("/dashboard")
+    }
 
     return <div>
         <Navbar/>

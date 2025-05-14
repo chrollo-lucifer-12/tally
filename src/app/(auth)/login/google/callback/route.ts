@@ -41,7 +41,6 @@ export async function GET(request: Request): Promise<Response> {
     const imageurl = claims.picture || "";
     const email = claims.email || "";
 
-
     const existingUser = await prisma.user.findUnique({where : {googleId : googleUserId}})
 
     if (existingUser !== null) {
