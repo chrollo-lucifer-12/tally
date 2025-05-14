@@ -85,19 +85,19 @@ const features = [
 
 const Feature5 = () => {
     return <section className="mt-32 flex flex-col items-center  gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-        <div className={"w-[700px] flex justify-between items-center"}>
+        <div className={"sm:w-[700px] w-[300px] flex justify-between items-center"}>
             <div>
-                <h1 className="text-black font-extrabold text-3xl">
+                <h1 className="text-black font-extrabold sm:text-3xl text-lg">
                     Connect your favorite tools
                 </h1>
                 <p className="mt-2 text-gray-700 text-[16px] max-w-[350px]">
                     Save time using popular integrations to sync your form submissions.
                 </p>
             </div>
-            <Image src={"/paper-plane.png"} alt={"smart"} width={250} height={250}/>
+            <Image src={"/paper-plane.png"} alt={"smart"} width={250} height={250} className={"hidden sm:block"}/>
         </div>
 
-        <div className={"w-[700px] grid grid-cols-3"}>
+        <div className={"sm:w-[700px] w-[300px] grid sm:grid-cols-3"}>
             {
                 features.map((feature, i) => (
                     <FeatureCard key={i} icon={feature.icon} title={feature.title} content={feature.content}/>

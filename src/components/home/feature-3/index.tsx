@@ -40,19 +40,19 @@ let features = [
 
 const Feature3 = () => {
     return <section className="mt-32 flex flex-col items-center  gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-        <div className={"w-[700px] flex justify-between items-center"}>
+        <div className={"sm:w-[700px] w-[300px] flex justify-between items-center"}>
             <div>
 
-            <h1 className="text-black font-extrabold text-3xl">
+            <h1 className="text-black font-extrabold text-lg sm:text-3xl">
                 Craft intelligent forms
             </h1>
-            <p className="mt-2 text-gray-700 text-[16px] max-w-[350px]">
+            <p className="mt-2 text-gray-700 text-[12px] max-w-[250px] sm:text-[16px] sm:max-w-[1200px]">
                 Our smart features make it easy to turn your forms into a tailored experience for every respondent.
             </p>
             </div>
-            <Image src={"/click-plus.png"} alt={"smart"} width={250} height={250}/>
+            <Image src={"/click-plus.png"} alt={"smart"} width={250} height={250} className={"hidden sm:block"}/>
         </div>
-        <div className={"rounded-2xl w-[700px] h-auto border border-gray-6 p-10 text-black"}>
+        <div className={"rounded-2xl sm:w-[700px] w-[300px] h-auto border border-gray-6 p-10 text-black"}>
             <Image src={"/icon2.svg"} alt={"icon1"} width={20} height={20} className={"text-pink-500"}/>
             <h1 className={"mt-2 font-extrabold text-black"}>Conditional logic</h1>
             <p className={"text-xs text-black mt-1"}>Build dynamic forms that adapt based on prior inputs or external
@@ -69,14 +69,14 @@ const Feature3 = () => {
                 </div>
             </div>
         </div>
-        <div className={"w-[700px] gap-x-10 flex"}>
-            <div className={"w-[50%] rounded-2xl border border-gray-6 p-[32px]"}>
+        <div className={"sm:w-[700px] w-[300px] gap-x-10 flex flex-col sm:flex-row gap-y-10"}>
+            <div className={"sm:w-[50%] rounded-2xl border border-gray-6 p-[32px]"}>
                 <Sigma className={"text-pink-500"}/>
                 <h1 className={"mt-2 font-extrabold text-black"}>Calculator</h1>
                 <p className={"text-xs text-black mt-1"}>Use variables to create dynamic content and calculate values, scores, prices and more.</p>
                 <Image src={"/smart-1.png"} alt={"smart-1"} width={500} height={300} className={""}/>
             </div>
-            <div className={"w-[50%] rounded-2xl border border-gray-6 p-[32px]"}>
+            <div className={"sm:w-[50%] rounded-2xl border border-gray-6 p-[32px]"}>
                 <EyeOff className={"text-pink-500"} />
                 <h1 className={"mt-2 font-extrabold text-black"}>Hidden fields</h1>
                 <p className={"text-xs text-black mt-1"}>
@@ -85,7 +85,7 @@ const Feature3 = () => {
                 <Image src={"/smart-2.png"} alt={"smart-2"} width={300} height={300} className={""}/>
             </div>
         </div>
-        <div className={"w-[700px] grid grid-cols-3"}>
+        <div className={"sm:w-[700px] w-[300px] grid sm:grid-cols-3"}>
             {
                 features.map((feature, i) => (
                     <FeatureCard key={i} icon={feature.icon} title={feature.title} content={feature.content} />

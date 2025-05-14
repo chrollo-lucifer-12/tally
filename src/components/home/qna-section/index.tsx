@@ -35,12 +35,12 @@ const QnaSection = () => {
 
     return (
         <section className="mt-32 flex flex-col items-center gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-            <div className="w-[700px]">
-                <h1 className="text-black font-extrabold text-3xl">
+            <div className="sm:w-[700px] w-[300px]">
+                <h1 className="text-black font-extrabold sm:text-3xl text-lg">
                     Questions & answers
                 </h1>
             </div>
-            <div className="w-[700px] mt-2">
+            <div className="sm:w-[700px] w-[300px] mt-2">
                 {questions.map((q, i) => (
                     <div key={i} className="w-full border-t border-gray-300">
                         <button
