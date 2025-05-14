@@ -21,3 +21,14 @@ export const VerifyEmailSchema = z.object({
         .max(6, { message: "OTP must be 6 digits" }),
     email : z.string().email()
 });
+
+export type FormState =
+    | {
+    errors?: {
+        name?: string[]
+        email?: string[]
+        password?: string[]
+    }
+    redirect ?: string
+}
+    | undefined

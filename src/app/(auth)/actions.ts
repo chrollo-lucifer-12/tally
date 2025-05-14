@@ -1,11 +1,11 @@
 "use server"
 
-import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema} from "@/lib/definitions";
+import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema, FormState} from "@/lib/definitions";
 import {prisma} from "@/lib/db"
 import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_KEY);
 
-export const SignupAction = async (state : any, formData : FormData) => {
+export const SignupAction = async (state : FormState, formData : FormData) => {
 
     const validatedFields = SignupSchemaEmail.safeParse({
         email : formData.get("email")
@@ -48,7 +48,7 @@ export const SignupAction = async (state : any, formData : FormData) => {
     }
 }
 
-export const CompleteInfoAction = async (state :any, formData : FormData) => {
+export const CompleteInfoAction = async (state : FormState, formData : FormData) => {
     const validatedFields = CompleteInfoSchema.safeParse({
         firstname : formData.get("firstname"),
         lastname : formData.get("lastname"),
@@ -79,7 +79,7 @@ export const CompleteInfoAction = async (state :any, formData : FormData) => {
     }
 }
 
-export const VerifyEmailAction = async (state : any, formData : FormData) => {
+export const VerifyEmailAction = async (state : FormState, formData : FormData) => {
 
     const validatedFields = VerifyEmailSchema.safeParse({
         otp :  formData.get("otp"),
@@ -159,3 +159,4 @@ export const GenerateOtp = async (email : string) => {
         console.log(e);
     }
 }
+

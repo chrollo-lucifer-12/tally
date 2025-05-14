@@ -1,8 +1,8 @@
-import {useActionState} from "react";
+import { useActionState } from "react";
 
 
-export const useForm = (sererAction : any) => {
-    const [state, action, pending] = useActionState(sererAction, undefined);
+export const useForm = <T = any>(serverAction: any) => {
+    const [state, action, pending] = useActionState<T>(serverAction, null as unknown as Awaited<T>);
 
-    return {state, action, pending}
-}
+    return { state, action, pending };
+};
