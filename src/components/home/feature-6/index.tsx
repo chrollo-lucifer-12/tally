@@ -1,8 +1,5 @@
 "use client"
-
-import ReviewCard from "@/components/home/review-card";
 import Image from "next/image";
-import {ArrowRight} from "lucide-react";
 
 
 const Feature5 = () => {
