@@ -56,7 +56,7 @@ const Footer = () => {
     ];
 
     return <section className="mt-64 flex flex-col items-center gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-        <div className={"w-full border border-gray-5"} />
+        <div className={"w-full border border-gray-4"} />
         <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div className="flex flex-col">
                 <Image src={"/logo.png"} alt={"logo"} width={50} height={50}/>
@@ -73,41 +73,41 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-col gap-3">
-                <h3 className="font-bold text-lg mb-2 text-black">Product</h3>
+                <h3 className="font-bold text-lg mb-2 text-black text-[12px]">Product</h3>
                 {productLinks.map((link, index) => (
-                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-sm">
+                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-[8px]">
                         {link.label}
                     </Link>
                 ))}
             </div>
 
             <div className="flex flex-col gap-3">
-                <h3 className="font-bold text-lg mb-2 text-black">Help</h3>
+                <h3 className="font-bold text-lg mb-2 text-black text-[12px]">Help</h3>
                 {helpLinks.map((link, index) => (
-                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-sm">
+                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-[8px]">
                         {link.label}
                     </Link>
                 ))}
 
-                <h3 className="font-bold text-lg mt-8 mb-2 text-black">Company</h3>
+                <h3 className="font-bold text-lg mt-8 mb-2 text-black text-[12px]">Company</h3>
                 {companyLinks.map((link, index) => (
-                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-sm">
+                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-[8px]">
                         {link.label}
                     </Link>
                 ))}
             </div>
 
             <div className="flex flex-col gap-3">
-                <h3 className="font-bold text-lg mb-2 text-black">Resources</h3>
+                <h3 className="font-bold text-lg mb-2 text-black text-[12px]">Resources</h3>
                 {resourceLinks.map((link, index) => (
-                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-sm">
+                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-[8px]">
                         {link.label}
                     </Link>
                 ))}
 
-                <h3 className="font-bold text-lg mt-8 mb-2 text-black">Compare</h3>
+                <h3 className="font-bold text-lg mt-8 mb-2 text-black text-[12px]">Compare</h3>
                 {compareLinks.map((link, index) => (
-                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-sm">
+                    <Link key={index} href={link.href} className="text-gray-700 hover:text-gray-900 text-[8px]">
                         {link.label}
                     </Link>
                 ))}

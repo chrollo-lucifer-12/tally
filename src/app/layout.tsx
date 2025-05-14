@@ -6,7 +6,7 @@ import '@ant-design/v5-patch-for-react-19';
 
 const inter = Inter({
     subsets : ["latin"],
-    weight : "400"
+    weight : "600"
 })
 
 export const metadata: Metadata = {

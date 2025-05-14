@@ -40,13 +40,17 @@ let features = [
 
 const Feature3 = () => {
     return <section className="mt-32 flex flex-col items-center  gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-        <div className={"w-[700px]"}>
+        <div className={"w-[700px] flex justify-between items-center"}>
+            <div>
+
             <h1 className="text-black font-extrabold text-3xl">
                 Craft intelligent forms
             </h1>
             <p className="mt-2 text-gray-700 text-[16px] max-w-[350px]">
                 Our smart features make it easy to turn your forms into a tailored experience for every respondent.
             </p>
+            </div>
+            <Image src={"/click-plus.png"} alt={"smart"} width={250} height={250}/>
         </div>
         <div className={"rounded-2xl w-[700px] h-auto border border-gray-6 p-10 text-black"}>
             <Image src={"/icon2.svg"} alt={"icon1"} width={20} height={20} className={"text-pink-500"}/>
@@ -61,7 +65,7 @@ const Feature3 = () => {
                     <div className={"rounded-full w-[10px] h-[10px] bg-gray-6"}/>
                 </div>
                 <div className={"border border-gray-4"}>
-                    <Image src={"/smart-3.png"} alt={"smart-3"} width={100} height={200} className={"w-full h-auto"}/>
+                    <Image src={"/smart-3.png"} alt={"smart-3"} width={500} height={500}/>
                 </div>
             </div>
         </div>
@@ -70,7 +74,7 @@ const Feature3 = () => {
                 <Sigma className={"text-pink-500"}/>
                 <h1 className={"mt-2 font-extrabold text-black"}>Calculator</h1>
                 <p className={"text-xs text-black mt-1"}>Use variables to create dynamic content and calculate values, scores, prices and more.</p>
-                <Image src={"/smart-1.png"} alt={"smart-1"} width={300} height={300} className={""}/>
+                <Image src={"/smart-1.png"} alt={"smart-1"} width={500} height={300} className={""}/>
             </div>
             <div className={"w-[50%] rounded-2xl border border-gray-6 p-[32px]"}>
                 <EyeOff className={"text-pink-500"} />

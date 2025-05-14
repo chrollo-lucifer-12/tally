@@ -17,6 +17,7 @@ const Feature1 = () => {
             </div>
 
             <div className="rounded-2xl w-[700px] h-auto border p-10 text-black shadow-[0_0_0_2px_rgb(248,28,229),0_0_0_4px_rgba(248,28,229,0.36)]">
+                <Image src={"/dive-in.png"} alt={"dive in "} width={200} height={100} className={"w-full"} />
                 <p className="text-[18px] font-[1000] bg-gradient-to-r from-[#8A46FF] to-[#F81CE0] bg-clip-text text-transparent">
                     Unlimited forms and submissions for free
                 </p>
