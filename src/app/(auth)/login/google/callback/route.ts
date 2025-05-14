@@ -6,6 +6,7 @@ import { decodeIdToken } from "arctic";
 import type { OAuth2Tokens } from "arctic";
 import {setSessionTokenCookie} from "@/lib/cookie";
 import {prisma} from "@/lib/db";
+import {Prisma} from "@prisma/client";
 
 export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
@@ -66,6 +67,20 @@ export async function GET(request: Request): Promise<Response> {
             email
         }
     });
+
+    const workspace =  await prisma.workspace.create({
+        data: {
+            name : "My Workspace",
+            adminId : user.id
+        } as Prisma.WorkspaceUncheckedCreateInput
+    });
+
+    await prisma.userWorkspaceMap.create({
+        data : {
+            userId : user.id,
+            workspaceId : workspace.id
+        }
+    })
 
     const sessionToken = generateSessionToken();
     const session = await createSession(sessionToken, user.id);

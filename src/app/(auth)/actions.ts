@@ -3,7 +3,7 @@
 import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema, FormState, LoginSchema} from "@/lib/definitions";
 import {prisma} from "@/lib/db"
 import emailjs from '@emailjs/browser';
-import {Session} from "@prisma/client";
+import {Session, Prisma} from "@prisma/client";
 import {createSession, generateSessionToken} from "@/lib/session";
 import {setSessionTokenCookie} from "@/lib/cookie";
 import {hash, compare} from "bcrypt"
@@ -143,6 +143,22 @@ export const CompleteInfoAction = async (state : FormState, formData : FormData)
                 firstname,
                 lastname,
                 password : hashedPassword
+            }
+        })
+
+
+      const workspace =  await prisma.workspace.create({
+          data: {
+              name : "My Workspace",
+              adminId : findUser!.id
+          } as Prisma.WorkspaceUncheckedCreateInput
+      });
+
+
+        await prisma.userWorkspaceMap.create({
+            data : {
+                userId : findUser!.id,
+                workspaceId : workspace.id
             }
         })
 

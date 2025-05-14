@@ -37,10 +37,13 @@ model User {
   templates         Template[]
   reviews           Review[]
   forms             Form[]
+  workspaces        Workspace[]
 }
 
 model Workspace {
   id                String             @id @default(nanoid(12))
+  adminId           String
+  admin             User               @relation(fields: [adminId], references: [id])
   name              String
   userWorkspaceMaps UserWorkspaceMap[]
   forms             Form[]

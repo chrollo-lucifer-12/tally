@@ -18,9 +18,9 @@ const FormList = ({forms} : FormListProps) => {
             <p className={"text-gray-7 font-light text-sm"}>Roll up your sleeves and let’s get started.</p>
             <p className={"text-gray-7 font-light text-sm"}>It's as simple as one-two-three.</p>
             <Link href={"/dashboard"}
-                  className={"text-white bg-blue-500 hover:bg-blue-800 font-[600] pt-1 pr-[0.7em] pb-1 pl-[0.7em] text-[12px] rounded-[7px]  flex items-center justify-center gap-x-[0.6em] gap-y-[0.6em] transition duration-200 focus:ring-2 focus:ring-blue-500"}>
-                <PlusIcon className={"w-4"}/>
-                New Form
+                  className={"text-white bg-blue-500 hover:bg-blue-800 text-xs gap-x-2 rounded-lg pl-2 pr-2 flex items-center justify-between transition duration-200 focus:ring-2 focus:ring-blue-500"}>
+                <PlusIcon className={"w-3"}/>
+                <p className={"font-bold"}>New Form</p>
             </Link>
         </div>
     }
