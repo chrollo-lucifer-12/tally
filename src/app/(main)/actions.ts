@@ -2,7 +2,8 @@
 
 import {getCurrentSession} from "@/lib/cookie";
 import {prisma} from "@/lib/db";
-import {WorkspaceSchema} from "@/lib/definitions";
+import {RenameWorkspaceSchema, WorkspaceSchema} from "@/lib/definitions";
+import {revalidatePath} from "next/cache";
 
 export const getUserForms = async () => {
     try {
@@ -79,6 +80,14 @@ export const createWorkspace = async  (state : any, formData : FormData) => {
             return;
         }
 
+        const count = await prisma.workspace.count({where : {adminId : user.id}})
+
+        if (count === 2) {
+            return {
+                message : "Cannot create more than 2 workspaces"
+            }
+        }
+
         await prisma.workspace.create({
             data : {
                 adminId : user.id,
@@ -86,10 +95,50 @@ export const createWorkspace = async  (state : any, formData : FormData) => {
             }
         })
 
+        revalidatePath("/dashboard")
+
         return {
             message : "Workspace Created"
         }
 
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const renameWorkspace = async (state : any, formData : FormData) => {
+    const validatedFields = RenameWorkspaceSchema.safeParse({
+        name: formData.get("name"),
+        id: formData.get('id')
+    })
+
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors
+        }
+    }
+
+    const {name, id} = validatedFields.data
+
+    try {
+        const {user, session} = await getCurrentSession();
+
+        if (!user || !session) {
+            return;
+        }
+
+        await prisma.workspace.update({
+            where: {id},
+            data: {
+                name
+            }
+        })
+
+        revalidatePath("/dashboard")
+
+        return {
+            message: "Workspace Renamed"
+        }
     } catch (e) {
         console.log(e);
     }

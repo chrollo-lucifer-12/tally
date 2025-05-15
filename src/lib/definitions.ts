@@ -29,6 +29,11 @@ export const WorkspaceSchema = z.object({
     name : z.string().min(1, {message : "Name cannot be empty"})
 })
 
+export const RenameWorkspaceSchema = z.object({
+    name : z.string().min(1, {message : "Name cannot be empty"}),
+    id : z.string()
+})
+
 export type Workspace = {
     forms: {
         id: string
