@@ -13,7 +13,6 @@ const CreateWorkspaceForm = () => {
         {
             state?.message &&  <p className={"text-green-800 text-[10px] mt-1"}>{state?.message}</p>
         }
-
         <CustomButton title={"Create Workspace"} type={"submit"} pending={pending} cn={"bg-black text-white hover:bg-gray-900 hover:text-white w-[120px]"} />
     </form>
 }

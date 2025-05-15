@@ -59,6 +59,27 @@ export const getWorkspaces = async () => {
     }
 }
 
+export const getUserWorkspaces = async () => {
+    try {
+        const {user, session} = await getCurrentSession();
+
+        if (!user || !session) {
+            return [];
+        }
+
+        const workspaces = await prisma.workspace.findMany({
+            where : {
+                adminId : user.id
+            }
+        })
+
+        return workspaces;
+    } catch (e) {
+        console.log(e);
+        return[];
+    }
+}
+
 export const createWorkspace = async  (state : any, formData : FormData) => {
 
     const validatedFields = WorkspaceSchema.safeParse({
