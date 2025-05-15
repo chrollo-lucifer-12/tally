@@ -25,6 +25,23 @@ export const LoginSchema = z.object({
     email : z.string().email()
 })
 
+export type Workspace = {
+    forms: {
+        id: string
+        workspaceId: string
+        title: string
+        isPublishes: boolean
+        createdAt: Date
+        updatedAt: Date
+        inTrash: boolean
+        userId: string | null
+    }[]
+} & {
+    id: string
+    name: string
+    adminId: string
+}
+
 export type Form = {
     id: string
     title: string

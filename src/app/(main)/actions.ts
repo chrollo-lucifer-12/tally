@@ -18,3 +18,42 @@ export const getUserForms = async () => {
         return [];
     }
 }
+
+export const getWorkspaces = async () => {
+    try {
+        const {user, session} = await getCurrentSession();
+
+        if (!user || !session) {
+            return [];
+        }
+
+        const workspaces = await prisma.workspace.findMany({
+            where: {
+                OR: [
+                    {adminId: user.id},
+                    {
+                        userWorkspaceMaps: {
+                            some: {
+                                userId: user.id
+                            }
+                        }
+                    }
+                ]
+            },
+            include : {
+                forms : {
+                    where: {
+                        inTrash : false
+                    }
+                }
+            }
+        });
+
+        return workspaces;
+
+        return workspaces;
+    } catch (e) {
+        console.log(e);
+        return [];
+    }
+}
