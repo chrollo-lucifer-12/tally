@@ -18,7 +18,7 @@ const CustomButton = ({ src, title, cn, type = "button", pending, href }: Custom
         <button
             type={type}
             disabled={pending}
-            className={`border-[1px] border-gray-5 h-[32px] rounded-[8px] flex justify-center pl-[0.9em] pr-[0.9em] text-gray-7 cursor-pointer hover:bg-gray-100 hover:text-black transition duration-200 ${cn}`}
+            className={`border-[1px] border-gray-5 h-[32px] rounded-[8px] flex justify-center pl-[0.9em] pr-[0.9em] text-gray-7 cursor-pointer hover:bg-gray-100 hover:text-black transition duration-200 whitespace-nowrap ${cn}`}
         >
             {
                 href ? (<Link href={href} className={`w-[70%] flex items-center ${src ? "justify-between" : "justify-center"}`}>

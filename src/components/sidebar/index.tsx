@@ -5,6 +5,7 @@ import WorkspacesList from "@/components/sidebar/workspaces-list";
 import MiscList from "@/components/sidebar/misc-list";
 
 const Sidebar = async () => {
+
     const {user} = await getCurrentSession();
 
     if (!user) {

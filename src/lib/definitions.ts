@@ -25,6 +25,10 @@ export const LoginSchema = z.object({
     email : z.string().email()
 })
 
+export const WorkspaceSchema = z.object({
+    name : z.string().min(1, {message : "Name cannot be empty"})
+})
+
 export type Workspace = {
     forms: {
         id: string
