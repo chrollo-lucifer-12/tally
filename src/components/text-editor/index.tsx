@@ -1,7 +1,6 @@
 "use client"
 
 import {
-    createReactBlockSpec,
     DefaultReactSuggestionItem, getDefaultReactSlashMenuItems,
     SuggestionMenuController,
     useCreateBlockNote
@@ -9,7 +8,6 @@ import {
 import {
     BlockNoteEditor,
     BlockNoteSchema, defaultBlockSpecs,
-    defaultProps,
     filterSuggestionItems,
     insertOrUpdateBlock
 } from "@blocknote/core";
@@ -18,6 +16,7 @@ import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
 import {InputBlock} from "@/components/text-editor/input-block";
 import {TextAreaBlock} from "@/components/text-editor/textarea-block";
+import {QuestinBlock} from "@/components/text-editor/question-block";
 
 
 
@@ -39,12 +38,22 @@ const textareaItem = (editor : BlockNoteEditor) => ({
     subtext: "Used to insert a block with text area",
 })
 
+const questionItem = (editor : BlockNoteEditor) => ({
+    title : "Insert Question ",
+    onItemClick : () =>
+        insertOrUpdateBlock(editor, {
+            type : "question"
+        }),
+    subtext: "Used to insert a question",
+})
+
 const getCustomSlashMenuItems = (
     editor: BlockNoteEditor
 ): DefaultReactSuggestionItem[] => [
     ...getDefaultReactSlashMenuItems(editor),
     inputItem(editor),
-    textareaItem(editor)
+    textareaItem(editor),
+    questionItem(editor)
 ];
 
 
@@ -52,7 +61,8 @@ const schema = BlockNoteSchema.create({
     blockSpecs: {
         ...defaultBlockSpecs,
         input : InputBlock,
-        textarea : TextAreaBlock
+        textarea : TextAreaBlock,
+        question : QuestinBlock
     },
 });
 
@@ -64,9 +74,8 @@ const TextEditor = () => {
         },
     );
 
-
     return <BlockNoteView editor={editor} theme={"light"}  onChange={(e) => {
-        console.log(editor.document)
+
     }} slashMenu={false}>
         <SuggestionMenuController triggerCharacter={"/"} getItems={async (query) =>
             filterSuggestionItems(getCustomSlashMenuItems(editor), query)
