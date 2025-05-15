@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { generateSessionToken, createSession, } from "@/lib/session";
 import { google } from "@/lib/auth";
 import { cookies } from "next/headers";

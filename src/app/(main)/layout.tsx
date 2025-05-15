@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 import Sidebar from "@/components/sidebar";
+import "@blocknote/core/fonts/inter.css";
+import "@blocknote/mantine/style.css";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
     return (

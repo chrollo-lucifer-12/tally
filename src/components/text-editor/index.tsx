@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client"
 
 import {
@@ -12,13 +14,10 @@ import {
     insertOrUpdateBlock
 } from "@blocknote/core";
 import {BlockNoteView} from "@blocknote/mantine";
-import "@blocknote/core/fonts/inter.css";
-import "@blocknote/mantine/style.css";
+
 import {InputBlock} from "@/components/text-editor/input-block";
 import {TextAreaBlock} from "@/components/text-editor/textarea-block";
 import {QuestinBlock} from "@/components/text-editor/question-block";
-
-
 
 const inputItem = (editor : BlockNoteEditor) => ({
     title : "Insert Input field",

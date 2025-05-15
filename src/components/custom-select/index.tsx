@@ -27,7 +27,7 @@ const CustomSelect = ({name, label , cn, options} : CustomSelectProps) => {
             >
                 {
                     options.map((o) => (
-                        <option key={o.id} value={o.value}>{o.name}</option>
+                        <option key={o.id} value={o.name}>{o.name}</option>
                     ))
                 }
             </select>

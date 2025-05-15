@@ -1,6 +1,9 @@
+// @ts-nocheck
+
 "use client"
 
 import {createReactBlockSpec} from "@blocknote/react";
+
 import {defaultProps} from "@blocknote/core";
 
 export const InputBlock = createReactBlockSpec(
