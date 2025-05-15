@@ -9,7 +9,7 @@ interface CustomDialogProps {
     description?: string;
     isOpen: boolean;
     setIsOpen: (res: boolean) => void;
-    width : string
+    width ?: string
 }
 
 const CustomDialog = ({ children, description, title, isOpen, setIsOpen, width="300px" }: CustomDialogProps) => {
