@@ -5,7 +5,7 @@ import WorkspaceTitle from "@/components/sidebar/workspaces-list/workspace-title
 const WorkspacesList = async () => {
     const workspaces = await getWorkspaces();
 
-    return <div className={"mt-6 flex flex-col gap-y-1"}>
+    return <div className={"mt-2 flex flex-col gap-y-1"}>
         <WorkspaceTitle/>
         <WorkspacesAccordion workspaces={workspaces}/>
     </div>

@@ -29,7 +29,7 @@ const LinksList = () => {
         {
             links.map((link, i) => (
                 <Link key={i} href={"/dashboard"}
-                      className={"flex items-center gap-x-2 text-gray-8 text-[12px] hover:bg-gray-100 rounded-md transition duration-200 pl-1 pr-1"}>
+                      className={"flex items-center gap-x-2 text-gray-8 text-[11px] hover:bg-gray-100 rounded-md transition duration-200 pl-1 pr-1"}>
                     <link.icon className={"w-4"}/>
                     <p className={"font-semibold"}>{link.name}</p>
                 </Link>

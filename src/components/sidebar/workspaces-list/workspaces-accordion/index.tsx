@@ -43,7 +43,7 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
             workspaces.map((workspace) => (
                 <Link key={workspace.id} href={`/workspaces/${workspace.id}`}
                       className={"flex flex-col gap-y-1"}>
-                    <div className={"flex justify-between items-center pl-1 pr-1 text-[12px] text-gray-9 font-semibold group transition duration-200 hover:bg-gray-2 rounded-md"}>
+                    <div className={"flex justify-between items-center pl-1 pr-1 text-[11px] text-gray-9 font-semibold group transition duration-200 hover:bg-gray-2 rounded-md"}>
                         <div className={"flex gap-x-1 items-center"}>
                             {
                                 !checkIfWorkspaceOpen(workspace.id) ? (<ChevronRightIcon
@@ -82,7 +82,7 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
 
                             {
                                 workspace.forms.map((form) => (
-                                    <Link href={`/forms/${form.id}`} key={form.id} className={"text-[12px] text-gray-9 font-semibold transition duration-200 hover:bg-gray-2 rounded-md pl-1 pr-1 ml-6"}>
+                                    <Link href={`/forms/${form.id}`} key={form.id} className={"text-[11px] text-gray-9 font-semibold transition duration-200 hover:bg-gray-2 rounded-md pl-1 pr-1 ml-6"}>
                                         <p>{form.title}</p>
                                     </Link>
                                 ))
