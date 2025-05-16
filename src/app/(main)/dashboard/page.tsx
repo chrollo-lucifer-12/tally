@@ -9,16 +9,11 @@ export const dynamic = "force-dynamic";
 const DashboardPage = async () => {
 
 
-    const {user} = await getCurrentSession();
-
-    if (!user) {
-        return redirect("/")
-    }
 
     const forms = await getUserForms();
 
     return <div className={"h-full w-full "}>
-        <FormList forms={forms}/>
+        <FormList forms={forms} type={"home"}/>
     </div>
 }
 

@@ -5,7 +5,7 @@ import {prisma} from "@/lib/db";
 import {RenameWorkspaceSchema, UpdateProfileSchema, WorkspaceSchema} from "@/lib/definitions";
 import {revalidatePath} from "next/cache";
 import {invalidateSession} from "@/lib/session";
-import { supabase } from '@/lib/supabase/server';
+import {supabase} from '@/lib/supabase/server';
 
 export const getUserForms = async () => {
     try {
@@ -20,6 +20,21 @@ export const getUserForms = async () => {
     } catch (e) {
         console.log(e);
         return [];
+    }
+}
+
+export const getWorkspaceForms = async (workspaceId : string) => {
+    try {
+        const {user, session} = await  getCurrentSession();
+
+        if (!user || !session) {
+            return [];
+        }
+
+        return await prisma.form.findMany({where: {workspaceId}, select: {id: true, title: true, updatedAt: true}});
+    } catch (e) {
+        console.log(e);
+        return []
     }
 }
 

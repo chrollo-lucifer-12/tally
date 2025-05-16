@@ -3,17 +3,13 @@
 import {PlusIcon} from "lucide-react";
 import Tooltip from "@/components/tooltip";
 import {useState} from "react";
-import CustomDialog from "@/components/custom-dialog";
 import CreateWorkspaceForm from "@/components/sidebar/workspaces-list/create-workspace-form";
-
 const WorkspaceTitle = () => {
 
     const [isOpen, setIsOpen] = useState(false)
 
     return <div className={"flex items-center justify-between text-[9px] text-gray-9 font-semibold pl-1 pr-1"}>
-        <CustomDialog title={"Add New Workspace"} isOpen={isOpen} setIsOpen={setIsOpen}>
-            <CreateWorkspaceForm/>
-        </CustomDialog>
+        <CreateWorkspaceForm isOpen={isOpen} setIsOpen={setIsOpen} />
         <p className={""}>Workspaces</p>
         <div className={"flex flex-col gap-y-1 group relative"}>
             <PlusIcon className={"w-4 text-gray-8 hover:bg-gray-100 rounded-md p-1 cursor-pointer"} onClick={() => {setIsOpen(true)}} />

@@ -69,7 +69,6 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
                         </div>
                         <div className={"gap-x-1 items-center hidden text-black group-hover:flex"}>
                             <div className={"flex flex-col gap-y-1 group relative"}>
-
                                 <EllipsisIcon className={"w-5  hover:bg-gray-100 rounded-md p-1 cursor-pointer"}
                                               onClick={(e) => {
                                                   e.preventDefault();

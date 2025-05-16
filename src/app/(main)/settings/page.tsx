@@ -6,12 +6,8 @@ const SettingsPage = async () => {
 
     const {user} = await getCurrentSession();
 
-    if (!user) {
-        return redirect("/");
-    }
-
     return <div className={"h-full w-full"}>
-        <SettingsClient user={user}/>
+        <SettingsClient user={user!}/>
     </div>
 }
 
