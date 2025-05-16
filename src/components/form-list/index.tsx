@@ -6,6 +6,8 @@ import Link from "next/link";
 import {EllipsisVerticalIcon, FolderPlusIcon, PencilIcon, PlusIcon, Trash2Icon} from "lucide-react";
 import {useState} from "react";
 import CreateWorkspaceForm from "@/components/sidebar/workspaces-list/create-workspace-form";
+import CreateFormButton from "@/components/create-form-button";
+import {deleteForm} from "@/app/(main)/actions";
 
 interface FormListProps {
     forms : Form[]
@@ -22,11 +24,7 @@ const FormList = ({forms, type} : FormListProps) => {
             <p className={"text-gray-10 font-bold text-md"}>No forms yet</p>
             <p className={"text-gray-7 font-light text-sm"}>Roll up your sleeves and let’s get started.</p>
             <p className={"text-gray-7 font-light text-sm"}>It's as simple as one-two-three.</p>
-            <Link href={"/dashboard"}
-                  className={"text-white bg-blue-500 hover:bg-blue-800 text-xs gap-x-2 rounded-lg pl-2 pr-2 flex items-center justify-between transition duration-200 focus:ring-2 focus:ring-blue-500"}>
-                <PlusIcon className={"w-3"}/>
-                <p className={"font-bold"}>New Form</p>
-            </Link>
+           <CreateFormButton/>
         </div>
     }
 
@@ -42,11 +40,7 @@ const FormList = ({forms, type} : FormListProps) => {
                         <p className={"font-bold"}>New Workspace</p>
                     </div>
                 }
-                <Link href={"/dashboard"}
-                      className={"text-white bg-blue-500 hover:bg-blue-800 text-xs gap-x-2 rounded-lg pl-2 pr-2 flex items-center justify-between transition duration-200 focus:ring-2 focus:ring-blue-500"}>
-                    <PlusIcon className={"w-3"}/>
-                    <p className={"font-bold"}>New Form</p>
-                </Link>
+             <CreateFormButton/>
             </div>
         </div>
         <div className={"w-full border border-gray-4 mt-2 mb-6"}/>
@@ -58,13 +52,18 @@ const FormList = ({forms, type} : FormListProps) => {
 
             {
                 forms.map((form) => (
-                    <div className={"w-full p-3 flex justify-between items-center rounded-md hover:bg-gray-100 cursor-pointer group transition duration-100"}>
+                    <div key={form.id} className={"w-full p-3 flex justify-between items-center rounded-md hover:bg-gray-100 cursor-pointer group transition duration-100"}>
                         <div className={"flex flex-col gap-y-1"}>
                             <p className={"text-gray-10 font-semibold"}>{form.title}</p>
                         </div>
                         <div className={"group-hover:flex gap-x-4 text-gray-7 hidden"}>
-                            <PencilIcon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} />
-                            <Trash2Icon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"}/>
+                            <PencilIcon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} href={`/forms/${form.id}/edit`} />
+                            <Trash2Icon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} onClick={async () => {
+                                const confirmed = window.confirm("Are you sure you want to delete this form?");
+                                if (confirmed) {
+                                    await deleteForm(form.id);
+                                }
+                            }} />
                             <EllipsisVerticalIcon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} />
                         </div>
                     </div>

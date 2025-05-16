@@ -22,7 +22,7 @@ export const InputBlock = createReactBlockSpec(
         render: (props) => {
             return (
                 <input
-                    className={` w-[200px] px-3 py-2 border border-gray-300 text-xs rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+                    className={`w-[20%] px-3 py-2 border border-gray-300 text-xs rounded-lg focus:outline-none hover:shadow-md `}
                     value={props.block.content.map(content => content.text)}
                     ref={props.contentRef}
                     onChange={(e) => {

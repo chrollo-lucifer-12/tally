@@ -98,7 +98,7 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
 
                             {
                                 workspace.forms.map((form) => (
-                                    <Link href={`/forms/${form.id}`} key={form.id}
+                                    <Link href={`/forms/${form.id}/summary`} key={form.id}
                                           className={"text-[11px] text-gray-9 font-semibold transition duration-200 hover:bg-gray-2 rounded-md pl-1 pr-1 ml-6"}>
                                         <p>{form.title}</p>
                                     </Link>

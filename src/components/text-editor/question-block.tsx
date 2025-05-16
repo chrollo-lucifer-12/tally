@@ -2,6 +2,7 @@
 
 import {createReactBlockSpec} from "@blocknote/react";
 import {defaultProps} from "@blocknote/core";
+import { MessageCircleQuestionIcon} from "lucide-react";
 
 export const QuestinBlock = createReactBlockSpec(
     {
@@ -21,9 +22,9 @@ export const QuestinBlock = createReactBlockSpec(
 
             return (
                 <div className={`flex items-center gap-x-2 ${block.props.textColor} ${block.props.textAlignment}`}>
-                    <p className={"text-gray-10 font-bold text-[20px]"}>Q</p>
+                    <MessageCircleQuestionIcon className={"w-4 h-4"} />
                 <p
-                    className={`w-full px-3 py-2 text-md font-semibold underline text-[15px]`}
+                    className={`w-full text-lg font-semibold text-[15px]`}
                     ref={props.contentRef}
                 />
                 </div>

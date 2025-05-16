@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Session {
@@ -62,6 +63,7 @@ model Form {
   workspaceId String     @unique
   workspace   Workspace  @relation(fields: [workspaceId], references: [id])
   title       String
+  content     Json?
   isPublishes Boolean    @default(false)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @default(now())
@@ -76,8 +78,6 @@ model Form {
 model Question {
   id              String            @id @default(uuid())
   title           String
-  type            String
-  options         String[]
   formId          String
   form            Form              @relation(fields: [formId], references: [id])
   reviewSolutions ReviewSolutions[]

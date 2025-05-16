@@ -253,3 +253,65 @@ export const updateProfileAction = async (state : any, formData : FormData) => {
         console.log(e);
     }
 }
+
+export const createOrGetForm = async (formId : string, workspaceId ?: string) => {
+    try {
+        const {user} = await getCurrentSession();
+        if (!user) return;
+
+        let findForm = await prisma.form.findUnique({where : {id : formId}})
+        if (findForm) {
+            return findForm.content
+        }
+
+        let workspace;
+        if (workspaceId) {
+            workspace = await prisma.workspace.findUnique({where : {id : workspaceId}})
+        } else {
+            workspace = await prisma.workspace.findFirst({where : {adminId : user.id}})
+        }
+
+        findForm = await prisma.form.create({
+            data : {
+                id: formId,
+                userId : user.id,
+                title : "Untitled",
+                workspaceId : workspace!.id
+            }
+        })
+
+        revalidatePath("/dashboard")
+
+        return null;
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const updateForm = async (formId : string, content : any) => {
+    try {
+
+
+        // await prisma.form.update({
+        //     where : {id : formId},
+        //     data : {
+        //         content : JSON.stringify(content)
+        //     }
+        // })
+
+        console.log(content);
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const deleteForm = async (formId : string) => {
+    try {
+        await prisma.form.delete({where : {id : formId}})
+        revalidatePath("/dashboard")
+    } catch (e) {
+        console.log(e);
+    }
+}
