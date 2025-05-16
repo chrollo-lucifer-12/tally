@@ -2,9 +2,10 @@
 
 import {deleteSessionTokenCookie, getCurrentSession} from "@/lib/cookie";
 import {prisma} from "@/lib/db";
-import {RenameWorkspaceSchema, WorkspaceSchema} from "@/lib/definitions";
+import {RenameWorkspaceSchema, UpdateProfileSchema, WorkspaceSchema} from "@/lib/definitions";
 import {revalidatePath} from "next/cache";
 import {invalidateSession} from "@/lib/session";
+import { supabase } from '@/lib/supabase/server';
 
 export const getUserForms = async () => {
     try {
@@ -180,6 +181,59 @@ export const deleteAccount = async () => {
             where : {id : user.id}
         })
         revalidatePath("/settings");
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const updateProfileAction = async (state : any, formData : FormData) => {
+
+    const validatedFields = UpdateProfileSchema.safeParse({
+        firstname : formData.get('firstname'),
+        lastname : formData.get('lastname'),
+        photo : formData.get('photo')
+    })
+
+    if (!validatedFields.success) {
+        return {
+            errors : validatedFields.error.flatten().fieldErrors
+        }
+    }
+
+    const {lastname, firstname, photo} = validatedFields.data
+
+    try {
+
+        const {user} = await getCurrentSession();
+        if (!user) return;
+
+        let imageUrl = null;
+        if (photo) {
+            const buffer = Buffer.from(await photo.arrayBuffer());
+            const filename = photo.name.substring(0, photo.name.lastIndexOf('.'));
+            const {error} = await supabase.storage.from("profile-photos").update(filename, buffer, {
+                contentType : photo.type,
+                upsert : true
+            })
+            if (error) {
+                console.log(error);
+                return;
+            }
+            const { data } = supabase.storage.from('profile-photos').getPublicUrl(filename);
+            imageUrl = data.publicUrl;
+        }
+
+        await prisma.user.update({
+            where : {id : user.id},
+            data : {
+                ...(firstname && {firstname}),
+                ...(lastname && {lastname}),
+                ...(imageUrl && {profileimage : imageUrl})
+            }
+        })
+
+        revalidatePath("/dashboard")
+
     } catch (e) {
         console.log(e);
     }

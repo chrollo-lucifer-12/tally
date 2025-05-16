@@ -1,5 +1,9 @@
 import {z} from "zod";
 
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
+
 export const SignupSchemaEmail = z.object({
     email : z.string().min(1, {message : "Please enter a value"})
 })
@@ -32,6 +36,14 @@ export const WorkspaceSchema = z.object({
 export const RenameWorkspaceSchema = z.object({
     name : z.string().min(1, {message : "Name cannot be empty"}),
     id : z.string()
+})
+
+
+export const UpdateProfileSchema = z.object({
+    photo : z.any().refine((file) => file?.size <= MAX_FILE_SIZE, {message : "Max image size is 5MB"}).refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+        "Only .jpg, .jpeg, .png and .webp formats are supported.").optional(),
+    firstname : z.string().min(3, {message : "Enter valid first name"}).optional(),
+    lastname : z.string().min(3, {message : "Enter valid first name"}).optional()
 })
 
 export type Workspace = {
