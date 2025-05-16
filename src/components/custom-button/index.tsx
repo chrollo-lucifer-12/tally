@@ -11,11 +11,13 @@ interface CustomButtonProps {
     type?: "button" | "reset" | "submit"
     pending?: boolean
     href ?: string
+    onClick ?: () => void
 }
 
-const CustomButton = ({ src, title, cn, type = "button", pending, href }: CustomButtonProps) => {
+const CustomButton = ({ src, title, cn, type = "button", pending, href, onClick }: CustomButtonProps) => {
     return (
         <button
+            onClick={onClick}
             type={type}
             disabled={pending}
             className={`border-[1px] border-gray-5 h-[32px] rounded-[8px] flex justify-center pl-[0.9em] pr-[0.9em] text-gray-7 cursor-pointer hover:bg-gray-100 hover:text-black transition duration-200 whitespace-nowrap ${cn}`}

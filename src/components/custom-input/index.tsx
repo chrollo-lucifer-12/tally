@@ -18,7 +18,7 @@ const CustomInput = ({label, name, placeholder, type, error, value, cn = ""}: Cu
             }
             <input
                 id={name}
-                value={value}
+                defaultValue={value}
                 name={name}
                 type={type}
                 placeholder={placeholder}

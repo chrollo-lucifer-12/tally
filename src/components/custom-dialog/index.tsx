@@ -16,7 +16,9 @@ const CustomDialog = ({ children, description, title, isOpen, setIsOpen, width="
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition duration-200" onBlur={() => {
+            setIsOpen(false);
+        }}>
             <div className={`bg-white p-1 rounded-lg shadow-lg flex flex-col`} style={{width}}>
                 <header className="m-1 flex justify-end">
                     <CircleXIcon className={"w-4 cursor-pointer text-gray-5"} onClick={() => {

@@ -1,9 +1,10 @@
 "use server"
 
-import {getCurrentSession} from "@/lib/cookie";
+import {deleteSessionTokenCookie, getCurrentSession} from "@/lib/cookie";
 import {prisma} from "@/lib/db";
 import {RenameWorkspaceSchema, WorkspaceSchema} from "@/lib/definitions";
 import {revalidatePath} from "next/cache";
+import {invalidateSession} from "@/lib/session";
 
 export const getUserForms = async () => {
     try {
@@ -160,6 +161,25 @@ export const renameWorkspace = async (state : any, formData : FormData) => {
         return {
             message: "Workspace Renamed"
         }
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const deleteAccount = async () => {
+    try {
+        const {user, session} = await getCurrentSession();
+
+        if (!user) return;
+
+        await deleteSessionTokenCookie();
+        await invalidateSession(session.id);
+        await prisma.workspace.deleteMany({where : {adminId : user.id}})
+        await prisma.form.deleteMany({where : {userId : user.id}})
+        await prisma.user.delete({
+            where : {id : user.id}
+        })
+        revalidatePath("/settings");
     } catch (e) {
         console.log(e);
     }
