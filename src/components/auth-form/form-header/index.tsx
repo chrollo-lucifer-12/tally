@@ -1,13 +1,9 @@
 "use client"
-
-import Link from "next/link";
-import Image from "next/image";
+import TallyIcon from "@/components/tally-icon";
 
 const FormHeader = ({signup} : {signup : boolean}) => {
     return <header className={"flex flex-col gap-y-10 justify-center"}>
-        <Link href={"/"} className={"bg-transparent text-gray-7"}>
-            <Image src={"/icon-2.svg"} alt={"icon"} width={20} height={20} className={"filter text-gray-7"}/>
-        </Link>
+        <TallyIcon href={"/"}/>
         <span>
             <p className={"text-black text-[20px] font-[700]"}>{signup ? "Create your Tally account" : "Welcome back"}</p>
             {
