@@ -8,9 +8,10 @@ interface CustomInputProps {
     cn?: string
     error ?: string
     value ?: string
+    disable?:boolean
 }
 
-const CustomInput = ({label, name, placeholder, type, error, value, cn = ""}: CustomInputProps) => {
+const CustomInput = ({label, name, placeholder, type, error, value, disable, cn = ""}: CustomInputProps) => {
     return (
         <div className="flex flex-col gap-y-1">
             {
@@ -21,6 +22,7 @@ const CustomInput = ({label, name, placeholder, type, error, value, cn = ""}: Cu
                 defaultValue={value}
                 name={name}
                 type={type}
+                disabled={disable}
                 placeholder={placeholder}
                 className={`border border-gray-300 font-light h-[32px] text-[14px] rounded-lg text-black px-3 py-1
                            focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-300
