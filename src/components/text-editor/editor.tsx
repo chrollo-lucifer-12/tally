@@ -14,81 +14,54 @@ import {
     insertOrUpdateBlock
 } from "@blocknote/core";
 import {BlockNoteView} from "@blocknote/mantine";
+import {ShortQuestionBlock} from "@/components/text-editor/shortquestion-block";
+import {LongQuestionBlock} from "@/components/text-editor/longquesstionblock";
 
-import {InputBlock} from "@/components/text-editor/input-block";
-import {TextAreaBlock} from "@/components/text-editor/textarea-block";
-import {QuestinBlock} from "@/components/text-editor/question-block";
-import {updateForm} from "@/app/(main)/actions";
-
-const inputItem = (editor : BlockNoteEditor) => ({
-    title : "Insert Input field",
+const shortQuestionItem = (editor: BlockNoteEditor) => ({
+    title: "Short answer question",
     onItemClick: () =>
         insertOrUpdateBlock(editor, {
-            type: "input",
-        }),
-    subtext: "Used to insert a block with input",
-})
-
-const textareaItem = (editor : BlockNoteEditor) => ({
-    title : "Insert Text Area",
-    onItemClick : () =>
-        insertOrUpdateBlock(editor, {
-            type : "textarea"
-        }),
-    subtext: "Used to insert a block with text area",
-})
-
-const questionItem = (editor : BlockNoteEditor) => ({
-    title : "Insert Question ",
-    onItemClick : () =>
-        insertOrUpdateBlock(editor, {
-            type : "question"
+            type: "shortquestion",
         }),
     subtext: "Used to insert a question",
-})
+});
+
+const longQuestionItem = (editor: BlockNoteEditor) => ({
+    title: "Long answer question",
+    onItemClick: () =>
+        insertOrUpdateBlock(editor, {
+            type: "longquestion",
+        }),
+    subtext: "Used to insert a question",
+});
 
 const getCustomSlashMenuItems = (
     editor: BlockNoteEditor
 ): DefaultReactSuggestionItem[] => [
-    ...getDefaultReactSlashMenuItems(editor),
-    inputItem(editor),
-    textareaItem(editor),
-    questionItem(editor)
+    shortQuestionItem(editor),
+    longQuestionItem(editor)
 ];
 
 
 const schema = BlockNoteSchema.create({
     blockSpecs: {
         ...defaultBlockSpecs,
-        input : InputBlock,
-        textarea : TextAreaBlock,
-        question : QuestinBlock
+        shortquestion: ShortQuestionBlock,
+        longquestion : LongQuestionBlock
     },
 });
 
-const Editor = ({content, formId } : {content : any | null, formId : string}) => {
+const Editor = () => {
 
     const editor = useCreateBlockNote(
         {
-            schema,
-            initialContent : content || [
-                {
-                    type : "heading",
-                    content : "Form Title"
-                },
-                {
-                    type: "paragraph",
-                    content: "Type /q to insert a question followed by input fields.",
-
-                    props : {
-                        textColor : "red"
-                    }
-                }
-            ]
+            schema
         },
     );
 
-    return <BlockNoteView editor={editor} theme={"light"} slashMenu={false} inputMode={"text"} >
+    return <BlockNoteView editor={editor} theme={"light"} slashMenu={false} inputMode={"text"} onChange={(e) => {
+        console.log(editor.document)
+    }}>
         <SuggestionMenuController triggerCharacter={"/"} getItems={async (query) =>
             filterSuggestionItems(getCustomSlashMenuItems(editor), query)
         } />
