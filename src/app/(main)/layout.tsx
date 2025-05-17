@@ -5,6 +5,8 @@ import "@blocknote/mantine/style.css";
 import {getCurrentSession} from "@/lib/cookie";
 import {redirect} from "next/navigation";
 import BreadCrumb from "@/components/breadcrumb";
+import MobileLinks from "@/components/mobile-links";
+import IconDropdown from "@/components/icon-dropdown";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
 
@@ -18,7 +20,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
     return (
         <main className="min-h-screen bg-white flex overflow-y-hidden" suppressHydrationWarning>
             <Sidebar />
-            <div className="flex-1"> <BreadCrumb/> {children}</div>
+            <div className="flex-1"> <BreadCrumb/>  <IconDropdown/> {children}</div>
         </main>
     );
 };

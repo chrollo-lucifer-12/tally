@@ -11,7 +11,7 @@ const BreadCrumb = () => {
     const segments = pathname.split("/")
 
 
-    return <div className={"text-xs text-gray-7 p-1 flex gap-x-1 items-center"}>
+    return <div className={"text-xs text-gray-7 p-1 gap-x-1 items-center hidden sm:flex"}>
         <TallyIcon href={"/dashboard"}/>
         <ChevronRightIcon className={"text-gray-6 w-4 h-4"} />
         <p className={"ml-2 hover:text-black cursor-pointer transition duration-200"}>

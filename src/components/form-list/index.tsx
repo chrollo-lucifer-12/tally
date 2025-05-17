@@ -28,16 +28,16 @@ const FormList = ({forms, type} : FormListProps) => {
         </div>
     }
 
-    return <div className={"w-full h-full p-[100px] pt-[60px] pb-[60px]"}>
+    return <div className={"w-full h-full p-[20px] sm:p-[100px] pt-[30px] sm:pt-[60px] pb-[30px] sm:pb-[60px]"}>
         <CreateWorkspaceForm isOpen={isOpen} setIsOpen={setIsOpen}/>
-        <div className={"flex justify-between w-full"}>
+        <div className={"flex items-center justify-between w-full"}>
             <h1 className={"text-gray-10 font-bold text-[25px]"}>{type === "home" ? "Home" : "Workspaces"}</h1>
             <div className={"flex h-[25px] gap-x-2"}>
                 {
                     type === "home" &&   <div onClick={() => {setIsOpen(true)}}
                                                className={"text-gray-7 hover:bg-gray-100 text-xs rounded-lg pl-2 pr-2 flex items-center justify-between transition duration-200 focus:ring-2 focus:ring-blue-500 gap-x-2"}>
                         <FolderPlusIcon className={"w-3"}/>
-                        <p className={"font-bold"}>New Workspace</p>
+                        <p className={"font-bold hidden md:block"}>New Workspace</p>
                     </div>
                 }
              <CreateFormButton/>

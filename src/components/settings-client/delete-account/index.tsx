@@ -18,7 +18,7 @@ const DeleteAccount = () => {
         setIsPending(false);
     }
 
-    return  <div className={"w-[50%] mt-10"}>
+    return  <div className={"w-[80%] md:w-[50%] mt-10"}>
         <CustomDialog title={"Delete account"} isOpen={isOpen} setIsOpen={setIsOpen}>
             <div className={"flex flex-col gap-y-0.5 text-xs text-gray-10"}>
                 <p>If you are sure you want to proceed with the deletion of your account, please continue below.</p>

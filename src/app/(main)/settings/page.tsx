@@ -1,5 +1,4 @@
 import {getCurrentSession} from "@/lib/cookie";
-import {redirect} from "next/navigation";
 import SettingsClient from "@/components/settings-client";
 
 const SettingsPage = async () => {

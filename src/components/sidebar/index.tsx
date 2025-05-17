@@ -12,7 +12,7 @@ const Sidebar = async () => {
         return;
     }
 
-    return <div className={"w-52 min-h-screen p-3 border-r border-gray-200"}>
+    return <div className={"w-52 min-h-screen p-3 border-r border-gray-200 hidden sm:block"}>
         <UserAvatar src={user.profileimage!} name={user.firstname!}/>
         <LinksList/>
         <WorkspacesList/>
