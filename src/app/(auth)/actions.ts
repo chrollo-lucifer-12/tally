@@ -4,9 +4,10 @@ import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema, FormState, Log
 import {prisma} from "@/lib/db"
 import emailjs from '@emailjs/browser';
 import {Session, Prisma} from "@prisma/client";
-import {createSession, generateSessionToken} from "@/lib/session";
-import {setSessionTokenCookie} from "@/lib/cookie";
+import {createSession, generateSessionToken, invalidateSession} from "@/lib/session";
+import {deleteSessionTokenCookie, getCurrentSession, setSessionTokenCookie} from "@/lib/cookie";
 import {hash, compare} from "bcrypt"
+import {revalidatePath} from "next/cache";
 
 emailjs.init(process.env.PUBLIC_KEY!);
 
@@ -47,6 +48,20 @@ export const SignupAction = async (state : FormState, formData : FormData) => {
         return {
             redirect : `/verify?email=${email}`
         }
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const LogoutAction = async () => {
+    try {
+        const {user, session} = await getCurrentSession();
+
+        await deleteSessionTokenCookie();
+        await invalidateSession(session!.id);
+
+        revalidatePath("/dashboard");
 
     } catch (e) {
         console.log(e);
