@@ -8,7 +8,7 @@ const IconDropdown = () => {
 
     const [isOpen, setIsOpen] = useState(false)
 
-    return <div className={"flex flex-col gap-y-1 m-2 relative"}>
+    return <div className={"flex flex-col gap-y-1 m-2 relative sm:hidden"}>
         <div className={"flex flex-row gap-x-2 items-center text-gray-8"} onClick={() => {
             setIsOpen(prevState => !prevState)
         }}>

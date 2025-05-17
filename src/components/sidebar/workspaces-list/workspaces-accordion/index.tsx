@@ -48,7 +48,7 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
         {
             workspaces.map((workspace) => (
                 <Link key={workspace.id} href={`/workspaces/${workspace.id}`}
-                      className={"flex flex-col gap-y-1"}>
+                      className={"flex flex-col gap-y-1 group"}>
                     <div
                         className={"flex justify-between items-center pl-1 pr-1 text-[11px] text-gray-9 font-semibold group transition duration-200 hover:bg-gray-2 rounded-md"}>
                         <div className={"flex gap-x-1 items-center"}>
