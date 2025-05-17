@@ -23,7 +23,7 @@ const VerifyPage = async ({searchParams} : {searchParams : Promise<{email : stri
 
     await GenerateOtp(email);
 
-    return <div className={"w-full max-w-[280px]"}>
+    return <div className={"w-full max-w-[280px] p-2 sm:p-0"}>
         <FormHeader signup/>
         <AuthForm type={"verify"} serverAction={VerifyEmailAction} email={email}/>
     </div>

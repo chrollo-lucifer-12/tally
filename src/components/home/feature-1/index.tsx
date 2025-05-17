@@ -6,16 +6,16 @@ import ReviewCard from "@/components/home/review-card";
 
 const Feature1 = () => {
     return (
-        <section className="mt-32 flex flex-col items-center  gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-            <div className={"sm:w-[700px] w-[300px]"}>
+        <section className="mt-32 flex flex-col items-center gap-y-10 sm:px-10 md:px-20 lg:px-[120px]">
+            <div className={"sm:w-[600px] md:w-[700px] w-[300px]"}>
                 <h1 className="text-black font-extrabold text-lg sm:text-3xl">
                     A form builder like no other
                 </h1>
-                <p className="mt-2 text-gray-700 text-[12px] max-w-[250px] sm:text-[16px] sm:max-w-[1200px]">
+                <p className="mt-2 text-gray-700 text-[12px] max-w-[250px] sm:text-[12px] md:text-[16px] sm:max-w-[650px] md:max-w-[1200px]">
                     Tally makes it simple for anyone to build free online forms. No need to code — just type your questions like you would in a doc.
                 </p>
             </div>
-            <div className="rounded-2xl sm:w-[700px] w-[300px] h-auto border p-10 text-black shadow-[0_0_0_2px_rgb(248,28,229),0_0_0_4px_rgba(248,28,229,0.36)]">
+            <div className="rounded-2xl sm:w-[600px] md:w-[700px] w-[300px] h-auto border p-10 text-black shadow-[0_0_0_2px_rgb(248,28,229),0_0_0_4px_rgba(248,28,229,0.36)]">
                 <Image src={"/dive-in.png"} alt={"dive in "} width={200} height={100} className={"w-full"} />
                 <p className="text-[18px] font-[1000] bg-gradient-to-r from-[#8A46FF] to-[#F81CE0] bg-clip-text text-transparent">
                     Unlimited forms and submissions for free
@@ -25,7 +25,7 @@ const Feature1 = () => {
                 </p>
             </div>
 
-            <div className={"sm:w-[700px] w-[300px] flex flex-col sm:flex-row gap-y-10 gap-x-10"}>
+            <div className={"sm:w-[600px] md:w-[700px] w-[300px] flex flex-col sm:flex-row gap-y-10 gap-x-10"}>
                 <div className={"sm:w-[60%] rounded-2xl border border-gray-6 p-[32px]"}>
                     <Image src={"/icon1.svg"} alt={"icon1"} width={20} height={20} className={"text-pink-500"}/>
                     <h1 className={"mt-2 font-extrabold text-black"}>Just start typing</h1>

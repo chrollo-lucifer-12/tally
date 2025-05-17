@@ -18,6 +18,7 @@
     "@prisma/client": "^6.7.0",
     "@supabase/supabase-js": "^2.49.4",
     "@types/bcrypt": "^5.0.2",
+    "@vercel/og": "^0.6.8",
     "arctic": "^3.6.1",
     "bcrypt": "^6.0.0",
     "i": "^0.3.7",

@@ -88,12 +88,7 @@ const Editor = ({content, formId } : {content : any | null, formId : string}) =>
         },
     );
 
-    return <BlockNoteView editor={editor} theme={"light"} slashMenu={false}>
-
-        <button onClick={ async () => {
-           await updateForm(formId, editor.document)
-        }}></button>
-
+    return <BlockNoteView editor={editor} theme={"light"} slashMenu={false} inputMode={"text"} >
         <SuggestionMenuController triggerCharacter={"/"} getItems={async (query) =>
             filterSuggestionItems(getCustomSlashMenuItems(editor), query)
         } />

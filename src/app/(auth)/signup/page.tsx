@@ -6,7 +6,7 @@ import AuthForm from "@/components/auth-form";
 
 const SignupPage = () => {
 
-    return <div className={"w-full max-w-[280px]"}>
+    return <div className={"w-full max-w-[280px] p-2 sm:p-0"}>
         <FormHeader signup={true}/>
         <GoogleLogin/>
         <div className={"border border-gray-4 mt-6"}/>

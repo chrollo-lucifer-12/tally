@@ -57,7 +57,7 @@ const Footer = () => {
 
     return <section className="mt-64 flex flex-col items-center gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
         <div className={"w-full border border-gray-4"} />
-        <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="w-full flex flex-col sm:flex-row sm:justify-between gap-y-4">
             <div className="flex flex-col">
                 <Image src={"/logo.png"} alt={"logo"} width={50} height={50}/>
                 <p className="text-sm mt-6 text-gray-700 font-semibold">Made and hosted in the EU 🇪🇺</p>

@@ -40,7 +40,7 @@ let features = [
 
 const Feature3 = () => {
     return <section className="mt-32 flex flex-col items-center  gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-        <div className={"sm:w-[700px] w-[300px] flex justify-between items-center"}>
+        <div className={"sm:w-[600px] md:w-[700px] w-[300px] flex justify-between items-center"}>
             <div>
 
             <h1 className="text-black font-extrabold text-lg sm:text-3xl">
@@ -52,7 +52,7 @@ const Feature3 = () => {
             </div>
             <Image src={"/click-plus.png"} alt={"smart"} width={250} height={250} className={"hidden sm:block"}/>
         </div>
-        <div className={"rounded-2xl sm:w-[700px] w-[300px] h-auto border border-gray-6 p-10 text-black"}>
+        <div className={"rounded-2xl sm:w-[600px] md:w-[700px] w-[300px] h-auto border border-gray-6 p-10 text-black"}>
             <Image src={"/icon2.svg"} alt={"icon1"} width={20} height={20} className={"text-pink-500"}/>
             <h1 className={"mt-2 font-extrabold text-black"}>Conditional logic</h1>
             <p className={"text-xs text-black mt-1"}>Build dynamic forms that adapt based on prior inputs or external
@@ -69,7 +69,7 @@ const Feature3 = () => {
                 </div>
             </div>
         </div>
-        <div className={"sm:w-[700px] w-[300px] gap-x-10 flex flex-col sm:flex-row gap-y-10"}>
+        <div className={"sm:w-[600px] md:w-[700px] w-[300px] gap-x-10 flex flex-col sm:flex-row gap-y-10"}>
             <div className={"sm:w-[50%] rounded-2xl border border-gray-6 p-[32px]"}>
                 <Sigma className={"text-pink-500"}/>
                 <h1 className={"mt-2 font-extrabold text-black"}>Calculator</h1>
@@ -85,7 +85,7 @@ const Feature3 = () => {
                 <Image src={"/smart-2.png"} alt={"smart-2"} width={300} height={300} className={""}/>
             </div>
         </div>
-        <div className={"sm:w-[700px] w-[300px] grid sm:grid-cols-3"}>
+        <div className={"sm:w-[600px] md:w-[700px] w-[300px] grid sm:grid-cols-3"}>
             {
                 features.map((feature, i) => (
                     <FeatureCard key={i} icon={feature.icon} title={feature.title} content={feature.content} />

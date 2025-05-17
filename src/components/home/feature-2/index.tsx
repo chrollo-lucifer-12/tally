@@ -52,7 +52,7 @@ const Feature2 = () => {
     }, []);
 ;
     return <section className="mt-32 flex flex-col items-center  gap-y-10 px-4 sm:px-10 md:px-20 lg:px-[120px]">
-        <div className={"sm:w-[700px] w-[300px] flex justify-between items-center"}>
+        <div className={"sm:w-[600px] md:w-[700px] w-[300px] flex justify-between items-center"}>
             <div>
                 <h1 className="text-black font-extrabold sm:text-3xl text-lg">
                     Simple but powerful
@@ -64,7 +64,7 @@ const Feature2 = () => {
             </div>
             <Image src={"/smart.png"} alt={"smart"} width={250} height={250} className={"hidden sm:block"} />
         </div>
-        <div className={"rounded-2xl sm:w-[700px] w-[300px] h-auto border border-gray-6 p-10 text-black"}>
+        <div className={"rounded-2xl sm:w-[600px] md:w-[700px] w-[300px] h-auto border border-gray-6 p-10 text-black"}>
             <Image src={"/icon2.svg"} alt={"icon1"} width={20} height={20} className={"text-pink-500"}/>
             <h1 className={"mt-2 font-extrabold text-black"}>Build any form in seconds</h1>
             <p className={"text-xs text-black mt-1"}>Easily create online forms using our wide range of free input
@@ -81,7 +81,7 @@ const Feature2 = () => {
                 </div>
             </div>
         </div>
-        <div className={"sm:w-[700px] w-[300px] grid grid-cols-1 sm:grid-cols-3"}>
+        <div className={"sm:w-[600px] md:w-[700px] w-[300px] grid grid-cols-1 sm:grid-cols-3"}>
             {
                 features.map((feature, i) => (
                     <FeatureCard key={i} icon={feature.icon} title={feature.title} content={feature.content}/>
