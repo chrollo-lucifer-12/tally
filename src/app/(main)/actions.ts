@@ -282,16 +282,31 @@ export const createOrGetForm = async (formId : string, workspaceId ?: string) =>
 
         revalidatePath("/dashboard")
 
-        return null;
+        return [];
 
     } catch (e) {
         console.log(e);
+        return[]
     }
 }
 
 export const updateForm = async (formId : string, content : any) => {
     try {
+        let questions: { type: any; title: any; formId: string; }[] = []
 
+        content.map((c) => {
+            if (c.type === "shortquestion" || c.type === "longquestion" || c.type === "mcq" || c.type === "contact" || c.type === "email" || c.type === "url") {
+                questions.push({type : c.type, title : c.content[0]?.text || "", formId})
+            }
+        })
+
+        await prisma.question.deleteMany({
+            where : {formId}
+        })
+
+        await prisma.question.createMany({
+            data : questions
+        })
 
         await prisma.form.update({
             where : {id : formId},

@@ -76,11 +76,12 @@ model Form {
 }
 
 model Question {
-  id              String            @id @default(uuid())
-  title           String
-  formId          String
-  form            Form              @relation(fields: [formId], references: [id])
-  reviewSolutions ReviewSolutions[]
+  id      String   @id @default(uuid())
+  type    String
+  title   String
+  formId  String
+  form    Form     @relation(fields: [formId], references: [id])
+  reviews Review[]
 }
 
 model Template {
@@ -93,19 +94,12 @@ model Template {
 }
 
 model Review {
-  id             String            @id @default(uuid())
-  userId         String
-  user           User              @relation(fields: [userId], references: [id])
-  Form           Form              @relation(fields: [formId], references: [id])
-  formId         String
-  reviewSolutons ReviewSolutions[]
-}
-
-model ReviewSolutions {
   id         String   @id @default(uuid())
-  reviewId   String
-  review     Review   @relation(fields: [reviewId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  Form       Form     @relation(fields: [formId], references: [id])
+  formId     String
   questionId String
   question   Question @relation(fields: [questionId], references: [id])
-  solutions  Int[]
+  response   Json
 }
