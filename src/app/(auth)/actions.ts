@@ -2,15 +2,12 @@
 
 import {SignupSchemaEmail, CompleteInfoSchema, VerifyEmailSchema, FormState, LoginSchema} from "@/lib/definitions";
 import {prisma} from "@/lib/db"
-import emailjs from '@emailjs/browser';
 import {Session, Prisma} from "@prisma/client";
 import {createSession, generateSessionToken, invalidateSession} from "@/lib/session";
 import {deleteSessionTokenCookie, getCurrentSession, setSessionTokenCookie} from "@/lib/cookie";
 import {hash, compare} from "bcrypt"
 import {revalidatePath} from "next/cache";
-
-emailjs.init(process.env.PUBLIC_KEY!);
-
+import axios from "axios";
 export const SignupAction = async (state : FormState, formData : FormData) => {
 
     const validatedFields = SignupSchemaEmail.safeParse({
@@ -260,16 +257,14 @@ export const GenerateOtp = async (email : string) => {
             },
         });
 
-        const templateParams = {
-            email,
-            otp,
-        };
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/sendEmail`, {
+            to: email,
+            subject: 'Verify',
+            text: 'Verification code',
+            html: `<p>${otp}</p>`
+        });
 
-        await emailjs.send(
-            process.env.SERVICE_ID!,
-            process.env.TEMPLATE_ID!,
-            templateParams
-        );
+        console.log('Email sent:', response.data);
 
     } catch (e) {
         console.log(e);

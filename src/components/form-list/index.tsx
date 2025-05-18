@@ -2,8 +2,7 @@
 
 import {Form} from "@/lib/definitions";
 import Image from "next/image";
-import Link from "next/link";
-import {EllipsisVerticalIcon, FolderPlusIcon, PencilIcon, PlusIcon, Trash2Icon} from "lucide-react";
+import {EllipsisVerticalIcon, FolderPlusIcon, PencilIcon, Trash2Icon} from "lucide-react";
 import {useState} from "react";
 import CreateWorkspaceForm from "@/components/sidebar/workspaces-list/create-workspace-form";
 import CreateFormButton from "@/components/create-form-button";

@@ -20,6 +20,7 @@
     "@types/bcrypt": "^5.0.2",
     "@vercel/og": "^0.6.8",
     "arctic": "^3.6.1",
+    "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
     "i": "^0.3.7",
     "lucide-react": "^0.510.0",

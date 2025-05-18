@@ -5,20 +5,12 @@ import Feature1 from "@/components/home/feature-1";
 import Feature2 from "@/components/home/feature-2";
 import Feature3 from "@/components/home/feature-3";
 import Feature4 from "@/components/home/feature-4";
-import Feature5 from "@/components/home/feature-5/page";
+import Feature5 from "@/components/home/feature-5";
 import Feature6 from "@/components/home/feature-6";
 import QnaSection from "@/components/home/qna-section";
 import Footer from "@/components/home/footer";
-import {getCurrentSession} from "@/lib/cookie";
-import {redirect} from "next/navigation";
 
 const Page = async () => {
-
-    const {session} = await getCurrentSession()
-
-    if (session) {
-        redirect("/dashboard")
-    }
 
     return <div>
         <Navbar/>
