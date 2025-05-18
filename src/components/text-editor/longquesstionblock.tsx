@@ -18,7 +18,7 @@ export const LongQuestionBlock = createReactBlockSpec(
     {
         render: (props) => {
             return (
-                <div className="flex flex-col gap-y-2 p-2">
+                <div className="flex flex-col gap-y-2">
                     <p
 
                         className="text-md font-semibold"

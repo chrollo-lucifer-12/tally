@@ -5,6 +5,6 @@ import dynamic from "next/dynamic";
 
 const Editor = dynamic(() => import("./editor"), { ssr: false });
 
-export const TextEditor = () => {
-    return <Editor />;
+export const TextEditor = (props : any) => {
+    return <Editor {...props} />;
 };

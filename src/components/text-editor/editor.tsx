@@ -20,6 +20,7 @@ import {ContactNumberBlock} from "@/components/text-editor/contactnumberblock";
 import {EmailBlock} from "@/components/text-editor/emailBlock";
 import {UrlBlock} from "@/components/text-editor/urlblock";
 import {Contact, Mail, SquareSlash, Link, SquareSlashIcon, ContactIcon, MailIcon, LinkIcon} from "lucide-react";
+import {updateForm} from "@/app/(main)/actions";
 
 const shortQuestionItem = (editor: BlockNoteEditor) => ({
     title: "Short answer question",
@@ -88,20 +89,28 @@ const schema = BlockNoteSchema.create({
     },
 });
 
-const Editor = () => {
+const Editor = ({content, formId} : {content : any, formId : string}) => {
+
+   // console.log(initialElements);
 
     const editor = useCreateBlockNote(
         {
-            schema
+            schema,
+            initialContent: content
         },
     );
 
-    return <BlockNoteView editor={editor} theme={"light"} slashMenu={false} inputMode={"text"} onChange={(e) => {
-        console.log(editor.document)
+
+    const handleUpdateForm = async () => {
+        await updateForm(formId, editor.document)
+    }
+
+    return <BlockNoteView editor={editor} theme={"light"} slashMenu={false} inputMode={"text"} onChange={async (e) =>   {
+        await handleUpdateForm()
     }}>
         <SuggestionMenuController triggerCharacter={"/"} getItems={async (query) =>
             filterSuggestionItems(getCustomSlashMenuItems(editor), query)
-        } />
+        }/>
     </BlockNoteView>
 }
 

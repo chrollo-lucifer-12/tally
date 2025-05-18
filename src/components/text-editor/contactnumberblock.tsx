@@ -2,6 +2,7 @@
 
 import { createReactBlockSpec } from "@blocknote/react";
 import { defaultProps } from "@blocknote/core";
+import {Phone} from "lucide-react";
 
 export const ContactNumberBlock = createReactBlockSpec(
     {
@@ -18,13 +19,14 @@ export const ContactNumberBlock = createReactBlockSpec(
     {
         render: (props) => {
             return (
-                <div className="flex flex-col gap-y-2 p-2">
-                    <div className="mt-2">
+                <div className="flex flex-col gap-y-2">
+                    <div className="relative w-[40%]">
+                        <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4"/>
                         <input
                             disabled
-                            placeholder={"Contact Number"}
+                            placeholder="Contact Number"
                             type="tel"
-                            className="w-[40%] px-3 py-2 border border-gray-300 text-xs rounded-lg focus:outline-none hover:shadow-md"
+                            className="w-full pl-9 pr-3 py-2 border border-gray-300 text-xs rounded-lg focus:outline-none hover:shadow-md"
                         />
                     </div>
                 </div>

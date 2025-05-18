@@ -293,14 +293,12 @@ export const updateForm = async (formId : string, content : any) => {
     try {
 
 
-        // await prisma.form.update({
-        //     where : {id : formId},
-        //     data : {
-        //         content : JSON.stringify(content)
-        //     }
-        // })
-
-        console.log(content);
+        await prisma.form.update({
+            where : {id : formId},
+            data : {
+                content : JSON.stringify(content)
+            }
+        })
 
     } catch (e) {
         console.log(e);

@@ -8,6 +8,7 @@ import {deleteSessionTokenCookie, getCurrentSession, setSessionTokenCookie} from
 import {hash, compare} from "bcrypt"
 import {revalidatePath} from "next/cache";
 import axios from "axios";
+import {redirect} from "next/navigation";
 export const SignupAction = async (state : FormState, formData : FormData) => {
 
     const validatedFields = SignupSchemaEmail.safeParse({
@@ -58,11 +59,11 @@ export const LogoutAction = async () => {
         await deleteSessionTokenCookie();
         await invalidateSession(session!.id);
 
-        revalidatePath("/dashboard");
-
     } catch (e) {
         console.log(e);
     }
+
+    redirect("/")
 }
 
 export const LoginAction = async (state : FormState, formData : FormData) => {
