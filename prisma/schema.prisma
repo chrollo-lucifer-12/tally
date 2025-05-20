@@ -60,7 +60,7 @@ model UserWorkspaceMap {
 
 model Form {
   id          String     @id @default(nanoid(6))
-  workspaceId String     @unique
+  workspaceId String
   workspace   Workspace  @relation(fields: [workspaceId], references: [id])
   title       String
   content     Json?

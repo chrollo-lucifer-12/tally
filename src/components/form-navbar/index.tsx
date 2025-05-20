@@ -29,7 +29,7 @@ const FormNavbar = ({formId} : {formId : string}) => {
     const isActive =  (name : string) =>  pathname.includes(name);
 
     return <div className={" mt-4 w-full"}>
-        <div className={"flex  gap-x-6 overflow-x-auto"}>
+        <div className={"flex  gap-x-6 "}>
             {
                 pages.map((page) => (
                     <div key={page.name} className={"group relative"}>

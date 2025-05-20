@@ -91,12 +91,12 @@ const schema = BlockNoteSchema.create({
 
 const Editor = ({content, formId} : {content : any, formId : string}) => {
 
-   // console.log(initialElements);
+  // console.log(content);
 
     const editor = useCreateBlockNote(
         {
             schema,
-            initialContent: content
+            ...(content?.length ? { initialContent: content } : {})
         },
     );
 

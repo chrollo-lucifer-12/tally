@@ -254,7 +254,7 @@ export const updateProfileAction = async (state : any, formData : FormData) => {
     }
 }
 
-export const createOrGetForm = async (formId : string, workspaceId ?: string) => {
+export const createOrGetForm = async (formId : string) => {
     try {
         const {user} = await getCurrentSession();
         if (!user) return;
@@ -264,19 +264,14 @@ export const createOrGetForm = async (formId : string, workspaceId ?: string) =>
             return findForm.content
         }
 
-        let workspace;
-        if (workspaceId) {
-            workspace = await prisma.workspace.findUnique({where : {id : workspaceId}})
-        } else {
-            workspace = await prisma.workspace.findFirst({where : {adminId : user.id}})
-        }
+        let workspace = await prisma.workspace.findFirst({where : {adminId : user.id}})
 
         findForm = await prisma.form.create({
             data : {
                 id: formId,
                 userId : user.id,
                 title : "Untitled",
-                workspaceId : workspace!.id
+                workspaceId : workspace.id
             }
         })
 
