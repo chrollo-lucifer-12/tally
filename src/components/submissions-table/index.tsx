@@ -1,6 +1,7 @@
 "use client"
 
 import {InboxIcon} from "lucide-react";
+import CustomButton from "@/components/custom-button";
 
 interface SubmissionsTableProps {
     reviews :  {
@@ -18,8 +19,27 @@ const SubmissionsTable = ({reviews} : SubmissionsTableProps) => {
         </div>
     }
 
+    const handleDownloadCSV = () => {
+        const csvData = reviews.map((row) =>
+            Object.values(row).map((value) => `"${value}"`).join(',')
+        );
+        const csvHeader = Object.keys(reviews[0]).map((key) => `"${key}"`).join(',');
+        const csvString = [csvHeader, ...csvData].join('\n');
+
+        const blob = new Blob([csvString], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'my_data.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
 
     return <div className={"w-full h-full pt-2 pb-2"}>
+        <CustomButton onClick={handleDownloadCSV} title={"Download CSV"} cn={"border-none p-1 text-xs"} />
         <table className="table-auto border-collapse w-full text-left">
             <thead>
             <tr>
