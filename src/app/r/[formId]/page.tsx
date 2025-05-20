@@ -3,7 +3,6 @@ import DisplayForm from "@/components/display-form";
 
 const Form = async (props: {params : Promise<{formId : string}>}) => {
     const params = await props.params
-
     const {formId} = params;
 
     const questions = await prisma.question.findMany({where : {formId}});
