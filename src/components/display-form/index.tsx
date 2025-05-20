@@ -31,7 +31,7 @@ const DisplayForm = ({questions, title, formId} : DisplayFormProps) => {
                     <DisplayQuestion key={q.id} question={q}/>
                 ))
             }
-            <input name={"formid"} value={formId} className={"hidden"} />
+            <input name={"formid"} defaultValue={formId} className={"hidden"} />
             <CustomButton type={"submit"} title={"Submit"} cn={"w-12 bg-black text-white font-semibold hover:bg-gray-900 hover:text-white pl-2 pr-2 mt-6"} />
         </form>
 
