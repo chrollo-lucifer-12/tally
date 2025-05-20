@@ -29,10 +29,10 @@ const DisplaySummary = ({reviews} : DisplaySummaryProps) => {
         </div>
     }
 
-    return <div className={"w-full h-full pt-6 pb-6 flex flex-col gap-y-2"}>
+    return <div className={"w-full h-full pt-6 pb-6 flex flex-col gap-y-2 max-h-[60vh] overflow-y-auto"}>
         {
             reviews.map((review) => (
-                <DisplayReview questionName={review.question.title || review.question.type} response={review.response}/>
+                <DisplayReview key={review.id} questionName={review.question.title || review.question.type} response={review.response}/>
             ))
         }
     </div>

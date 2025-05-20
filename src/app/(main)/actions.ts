@@ -323,3 +323,22 @@ export const deleteForm = async (formId : string) => {
         console.log(e);
     }
 }
+
+export const addWebhook = async (formData : FormData) => {
+
+    const formId = formData.get("formId")
+    const url = formData.get("url")
+
+    if (!url) return;
+
+    try {
+        await prisma.form.update({
+            where : {id : formId},
+            data : {
+                webhookUrl : url
+            }
+        })
+    } catch (e) {
+        console.log(e);
+    }
+}

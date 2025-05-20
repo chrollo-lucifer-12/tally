@@ -26,10 +26,19 @@ const SubmissionsPage = async (props : {params : Promise<{formId : string}>}) =>
         }
     })
 
-    let formattedReviews : {questionName : string, response : string}[] = [];
-    reviews.map((r) => {
-        formattedReviews.push({questionName : r.question.title || r.question.type, response : r.response as string})
-    })
+
+
+    let formattedReviews = new Map<string, string[]>();
+    reviews.forEach((r) => {
+        const question = r.question.title || r.question.type;
+        const response = r.response as string;
+
+        if (!formattedReviews.has(question)) {
+            formattedReviews.set(question, []);
+        }
+
+        formattedReviews.get(question)!.push(response);
+    });
 
     return <div className={"w-full h-full p-[20px] sm:p-[100px] pt-[30px] sm:pt-[60px] pb-[30px] sm:pb-[60px]"}>
         <FormHeader formId={formId}/>
