@@ -1,20 +1,12 @@
 "use client"
 
-import Image from "next/image";
 import CustomInput from "@/components/custom-input";
 import {addWebhook} from "@/app/(main)/actions";
+import AddPage from "@/components/integrations/add-page";
 
 const AddWebhook = ({formId} : {formId : string}) => {
     return <div className="fixed top-0 left-0 w-full h-full bg-white z-50 flex flex-col gap-y-6 items-center justify-center">
-        <div className={"flex gap-x-2 w-[50%] items-center justify-center"}>
-            <Image src={"/icon-2.svg"} alt={"icon"} width={25} height={25} />
-            <Image src={"/circles.svg"} alt={"icon"} width={25} height={25} />
-            <Image src={"/icon_WEBHOOKS.png"} alt={"icon"} width={25} height={25} />
-        </div>
-        <div className={"flex flex-col gap-y-1 items-center justify-center text-2xl w-[80%]"}>
-            <p className={"text-black font-semibold"}>Add a webhook endpoint</p>
-            <p className={"text-black text-[8px] max-w-[250px] text-center"}>Webhooks allow you to receive HTTP POST requests to a URL for new form submissions. Learn about webhooks.</p>
-        </div>
+        <AddPage src={"/icon_WEBHOOKS.png"} title={"Add a webhook endpoint"} description={"Webhooks allow you to receive HTTP POST requests to a URL for new form submissions. Learn about webhooks."} />
         <div className={" w-[40%]"}>
             <form action={addWebhook} className={"flex flex-col gap-y-6"}>
             <CustomInput  name={"url"} type={"url"} label={"Endpoint"} placeholder={"https://"} />

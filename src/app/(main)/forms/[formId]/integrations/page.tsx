@@ -2,7 +2,8 @@ import FormHeader from "@/components/form-header";
 import FormNavbar from "@/components/form-navbar";
 import {prisma} from "@/lib/db";
 import Connections from "@/components/connections";
-import WebhookIntegration from "@/components/webhook-integration";
+import WebhookIntegration from "../../../../../components/integrations/webhook-integration";
+import GoogleSheetsIntegration from "@/components/integrations/googlesheets-integration";
 
 const IntegrationsPage = async (props : {params : Promise<{formId : string}>}) => {
     const params = await props.params;
@@ -22,8 +23,8 @@ const IntegrationsPage = async (props : {params : Promise<{formId : string}>}) =
             <p className={"text-black text-md font-bold"}>Discover integrations</p>
             <p className={"text-gray-9 text-xs max-w-[380px]"}>Make Tally even more powerful by using these tools. Check out our roadmap for upcoming integrations and to request new ones.</p>
         </div>
-
         <WebhookIntegration formId={formId} />
+        <GoogleSheetsIntegration formId={formId}/>
     </div>
 }
 
