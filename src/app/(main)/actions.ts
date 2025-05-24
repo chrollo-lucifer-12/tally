@@ -343,7 +343,6 @@ export const addWebhook = async (formData : FormData) => {
     }
 }
 
-
 export const renameForm = async (state : any, formData : FormData) => {
     const validatedFields = RenameFormSchema.safeParse({
         name: formData.get("name"),
@@ -378,6 +377,15 @@ export const renameForm = async (state : any, formData : FormData) => {
         return {
             message: "Form Renamed"
         }
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const deleteWebhook = async (id : string) => {
+    try {
+        await prisma.form.update({where : {id}, data : {webhookUrl : null}});
+        revalidatePath("/forms")
     } catch (e) {
         console.log(e);
     }

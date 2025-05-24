@@ -15,7 +15,7 @@ const IntegrationsPage = async (props : {params : Promise<{formId : string}>}) =
         <FormNavbar formId={formId}/>
 
         {
-            connection && connection.webhookUrl && <Connections url={connection.webhookUrl} />
+            connection && connection.webhookUrl && <Connections url={connection.webhookUrl} id = {formId} />
         }
 
         <div className={"flex flex-col gap-y-2 mt-4"}>

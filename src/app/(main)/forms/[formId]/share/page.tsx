@@ -16,7 +16,7 @@ const SharePage = async (props : {params : Promise<{formId : string}>}) => {
                 <p className={"text-gray-11 text-xs"}>Your form is now published and ready to be shared with the world!
                     Copy
                     this link to share your form on social media, messaging apps or via email.</p>
-                <CustomInput name={"link"} type={"text"} value={`/forms/${formId}`} disable={true}
+                <CustomInput name={"link"} type={"text"} value={`${process.env.NEXT_PUBLIC_BASE_URL}/r/${formId}`} disable={true}
                              cn={"mt-1 cursor-pointer"}/>
             </div>
             <div className={"w-[50%] mt-6 flex flex-col gap-y-0.5 p-2"}>
