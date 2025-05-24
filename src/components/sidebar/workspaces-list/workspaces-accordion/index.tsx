@@ -6,7 +6,8 @@ import { ChevronDownIcon, ChevronRightIcon, EllipsisIcon, PlusIcon} from "lucide
 import {useState} from "react";
 import CustomDialog from "@/components/custom-dialog";
 import RenameWorkspaceForm from "@/components/sidebar/workspaces-list/rename-workspace-form";
-import Tooltip from "@/components/tooltip";
+import DisplayForms from "@/components/sidebar/workspaces-list/display-forms";
+import {useRouter} from "next/navigation";
 
 interface WorkspacesAccordionProps {
     workspaces : Workspace[]
@@ -17,6 +18,8 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
     const [openWorkspaceIds, setOpenWorkspaceIds] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState(false)
     const [renameWorkspaceId, setRenameWorkspaceId] = useState<string | null>(null)
+
+    const router = useRouter();
 
     const handleIconClick = (e: any, workspaceId: string) => {
         e.preventDefault();
@@ -47,7 +50,9 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
         }
         {
             workspaces.map((workspace) => (
-                <Link key={workspace.id} href={`/workspaces/${workspace.id}`}
+                <div key={workspace.id} onClick={() => {
+                    router.push(`/workspaces/${workspace.id}`);
+                }}
                       className={"flex flex-col gap-y-1 group"}>
                     <div
                         className={"flex justify-between items-center pl-1 pr-1 text-[11px] text-gray-9 font-semibold group transition duration-200 hover:bg-gray-2 rounded-md"}>
@@ -76,10 +81,10 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
                                                   setIsOpen(true)
                                                   setRenameWorkspaceId(workspace.id)
                                               }}/>
-                                <Tooltip
-                                    cn={"top-full mt-1 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-200"}>
-                                    <p>Rename, delete and more...</p>
-                                </Tooltip>
+                                {/*<Tooltip*/}
+                                {/*    cn={"top-full mt-1 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition duration-200"}>*/}
+                                {/*    <p>Rename, delete and more...</p>*/}
+                                {/*</Tooltip>*/}
                             </div>
                             <PlusIcon className={"w-5  hover:bg-gray-100 rounded-md p-1 cursor-pointer"}
                                       onClick={(e) => {
@@ -96,17 +101,10 @@ const WorkspacesAccordion = ({workspaces} : WorkspacesAccordionProps) => {
                                 <p className={"text-[11px] text-gray-8 font-semibold ml-6"}>No forms yet</p>
                             }
 
-                            {
-                                workspace.forms.map((form) => (
-                                    <Link href={`/forms/${form.id}/summary`} key={form.id}
-                                          className={"text-[11px] text-gray-9 font-semibold transition duration-200 hover:bg-gray-2 rounded-md pl-1 pr-1 ml-6"}>
-                                        <p>{form.title}</p>
-                                    </Link>
-                                ))
-                            }
+                           <DisplayForms workspace={workspace}/>
                         </div>
                     }
-                </Link>
+                </div>
             ))
         }
     </div>

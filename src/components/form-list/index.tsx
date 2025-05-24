@@ -7,6 +7,8 @@ import {useState} from "react";
 import CreateWorkspaceForm from "@/components/sidebar/workspaces-list/create-workspace-form";
 import CreateFormButton from "@/components/create-form-button";
 import {deleteForm} from "@/app/(main)/actions";
+import Link from "next/link";
+import {useRouter} from "next/navigation";
 
 interface FormListProps {
     forms : Form[]
@@ -16,6 +18,8 @@ interface FormListProps {
 const FormList = ({forms, type} : FormListProps) => {
 
     const [isOpen, setIsOpen] = useState(false);
+
+    const router = useRouter();
 
     if (!forms.length && type === "home") {
         return <div className={"flex flex-col gap-y-1 items-center justify-center w-full h-full"}>
@@ -31,7 +35,7 @@ const FormList = ({forms, type} : FormListProps) => {
         <CreateWorkspaceForm isOpen={isOpen} setIsOpen={setIsOpen}/>
         <div className={"flex items-center justify-between w-full"}>
             <h1 className={"text-gray-10 font-bold text-[25px]"}>{type === "home" ? "Home" : "Workspaces"}</h1>
-            <div className={"flex h-[25px] gap-x-2"}>
+            <div className={"flex h-[25px] gap-x-2 cursor-pointer"}>
                 {
                     type === "home" &&   <div onClick={() => {setIsOpen(true)}}
                                                className={"text-gray-7 hover:bg-gray-100 text-xs rounded-lg pl-2 pr-2 flex items-center justify-between transition duration-200 focus:ring-2 focus:ring-blue-500 gap-x-2"}>
@@ -51,12 +55,16 @@ const FormList = ({forms, type} : FormListProps) => {
 
             {
                 forms.map((form) => (
-                    <div key={form.id} className={"w-full p-3 flex justify-between items-center rounded-md hover:bg-gray-100 cursor-pointer group transition duration-100"}>
+                    <Link href={`/forms/${form.id}/summary`} key={form.id} className={"w-full p-3 flex justify-between items-center rounded-md hover:bg-gray-100 cursor-pointer group transition duration-100"}>
                         <div className={"flex flex-col gap-y-1"}>
                             <p className={"text-gray-10 font-semibold"}>{form.title}</p>
                         </div>
                         <div className={"group-hover:flex gap-x-4 text-gray-7 hidden"}>
-                            <PencilIcon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} href={`/forms/${form.id}/edit`} />
+                            <PencilIcon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"}  onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                router.push(`/forms/${form.id}/edit`);
+                            }} />
                             <Trash2Icon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} onClick={async () => {
                                 const confirmed = window.confirm("Are you sure you want to delete this form?");
                                 if (confirmed) {
@@ -65,7 +73,7 @@ const FormList = ({forms, type} : FormListProps) => {
                             }} />
                             <EllipsisVerticalIcon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} />
                         </div>
-                    </div>
+                    </Link>
                 ))
             }
         </div>

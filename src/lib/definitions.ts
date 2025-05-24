@@ -38,6 +38,11 @@ export const RenameWorkspaceSchema = z.object({
     id : z.string()
 })
 
+export const RenameFormSchema = z.object({
+    name : z.string().min(1, {message : "Name cannot be empty"}),
+    formId : z.string()
+})
+
 
 export const UpdateProfileSchema = z.object({
     photo : z.any().refine((file) => file?.size <= MAX_FILE_SIZE, {message : "Max image size is 5MB"}).refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),

@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode } from "react";
+import {ReactNode, useRef} from "react";
 import {CircleXIcon} from "lucide-react";
 
 interface CustomDialogProps {
@@ -13,12 +13,18 @@ interface CustomDialogProps {
 }
 
 const CustomDialog = ({ children, description, title, isOpen, setIsOpen, width="300px" }: CustomDialogProps) => {
+    const modalRef = useRef<HTMLDivElement>(null);
+
     if (!isOpen) return null;
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition duration-200 "  onBlur={() => {
+    const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
             setIsOpen(false);
-        }}>
+        }
+    };
+
+    return (
+        <div ref={modalRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition duration-200"  onClick={handleClickOutside}>
             <div className={`bg-white p-1 rounded-lg shadow-lg flex flex-col`} style={{width}}>
                 <header className="m-1 flex justify-end">
                     <CircleXIcon className={"w-4 cursor-pointer text-gray-5"} onClick={() => {

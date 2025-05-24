@@ -17,4 +17,6 @@ const RenameWorkspaceForm = ({id} : {id : string}) => {
         <CustomButton title={"Rename Workspace"} type={"submit"} pending={pending} cn={"bg-black text-white hover:bg-gray-900 hover:text-white w-[120px]"} />
     </form>
 }
+
+
 export default RenameWorkspaceForm

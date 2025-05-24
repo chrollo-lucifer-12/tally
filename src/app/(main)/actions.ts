@@ -2,7 +2,7 @@
 
 import {deleteSessionTokenCookie, getCurrentSession} from "@/lib/cookie";
 import {prisma} from "@/lib/db";
-import {RenameWorkspaceSchema, UpdateProfileSchema, WorkspaceSchema} from "@/lib/definitions";
+import {RenameFormSchema, RenameWorkspaceSchema, UpdateProfileSchema, WorkspaceSchema} from "@/lib/definitions";
 import {revalidatePath} from "next/cache";
 import {invalidateSession} from "@/lib/session";
 import {supabase} from '@/lib/supabase/server';
@@ -271,7 +271,7 @@ export const createOrGetForm = async (formId : string) => {
                 id: formId,
                 userId : user.id,
                 title : "Untitled",
-                workspaceId : workspace.id
+                workspaceId : workspace!.id
             }
         })
 
@@ -289,7 +289,7 @@ export const updateForm = async (formId : string, content : any) => {
     try {
         let questions: { type: any; title: any; formId: string; }[] = []
 
-        content.map((c) => {
+        content.map((c : any) => {
             if (c.type === "shortquestion" || c.type === "longquestion" || c.type === "mcq" || c.type === "contact" || c.type === "email" || c.type === "url") {
                 questions.push({type : c.type, title : c.content[0]?.text || "", formId})
             }
@@ -333,11 +333,51 @@ export const addWebhook = async (formData : FormData) => {
 
     try {
         await prisma.form.update({
-            where : {id : formId},
+            where : {id : formId as string},
             data : {
-                webhookUrl : url
+                webhookUrl : url as string
             }
         })
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
+export const renameForm = async (state : any, formData : FormData) => {
+    const validatedFields = RenameFormSchema.safeParse({
+        name: formData.get("name"),
+        formId: formData.get('formId')
+    })
+
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors
+        }
+    }
+
+    const {name, formId} = validatedFields.data
+    console.log(name ,formId)
+
+    try {
+        const {user, session} = await getCurrentSession();
+
+        if (!user || !session) {
+            return;
+        }
+
+        await prisma.form.update({
+            where: {id : formId},
+            data: {
+               title : name
+            }
+        })
+
+        revalidatePath("/workspaces")
+
+        return {
+            message: "Form Renamed"
+        }
     } catch (e) {
         console.log(e);
     }
