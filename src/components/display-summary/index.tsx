@@ -2,9 +2,10 @@
 import { Prisma } from "@prisma/client";
 import {InboxIcon} from "lucide-react";
 import DisplayReview from "@/components/display-summary/display-review";
+import {use} from "react";
 
 interface DisplaySummaryProps {
-    reviews :  ({
+    reviews : Promise<({
         question: {
             title: string
             type: string
@@ -15,12 +16,14 @@ interface DisplaySummaryProps {
         formId: string
         questionId: string
         response: Prisma.JsonValue
-    })[]
+    })[]>
 }
 
 const DisplaySummary = ({reviews} : DisplaySummaryProps) => {
 
-    if (!reviews.length) {
+    const allReviews = use(reviews);
+
+    if (!allReviews.length) {
         return <div className={"w-full h-full items-center justify-center flex flex-col gap-y-2"}>
             <InboxIcon className={"w-16 h-16 text-gray-6"} />
             <p className={"text-black font-semibold text-md"}>No completed submissions yet</p>
@@ -30,7 +33,7 @@ const DisplaySummary = ({reviews} : DisplaySummaryProps) => {
 
     return <div className={"w-full h-full pt-6 pb-6 flex flex-col gap-y-2 max-h-[60vh] overflow-y-auto"}>
         {
-            reviews.map((review) => (
+            allReviews.map((review) => (
                 <DisplayReview key={review.id} questionName={review.question.title || review.question.type} response={JSON.stringify(review.response)}/>
             ))
         }

@@ -9,6 +9,7 @@ import CreateFormButton from "@/components/create-form-button";
 import {deleteForm} from "@/app/(main)/actions";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
+import { use } from 'react'
 
 interface FormListProps {
     forms : Form[]
@@ -65,7 +66,9 @@ const FormList = ({forms, type} : FormListProps) => {
                                 e.preventDefault();
                                 router.push(`/forms/${form.id}/edit`);
                             }} />
-                            <Trash2Icon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} onClick={async () => {
+                            <Trash2Icon className={"w-5 hover:bg-gray-200 rounded-md p-1 transition duration-200"} onClick={async (e) => {
+                                e.preventDefault()
+                                e.stopPropagation()
                                 const confirmed = window.confirm("Are you sure you want to delete this form?");
                                 if (confirmed) {
                                     await deleteForm(form.id);

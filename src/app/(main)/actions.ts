@@ -287,8 +287,8 @@ export const updateForm = async (formId : string, content : any) => {
 
 export const deleteForm = async (formId : string) => {
     try {
-        await prisma.form.delete({where : {id : formId}})
-        revalidatePath("/dashboard")
+        await prisma.form.update({where : {id : formId}, data : {inTrash : true}})
+       revalidatePath("/dashboard")
     } catch (e) {
         console.log(e);
     }
