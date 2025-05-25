@@ -1,7 +1,6 @@
 "use client"
-
+import { Prisma } from "@prisma/client";
 import {InboxIcon} from "lucide-react";
-import DisplayQuestion from "@/components/display-form/display-question";
 import DisplayReview from "@/components/display-summary/display-review";
 
 interface DisplaySummaryProps {
@@ -15,7 +14,7 @@ interface DisplaySummaryProps {
         userId: string
         formId: string
         questionId: string
-        response: JsonValue
+        response: Prisma.JsonValue
     })[]
 }
 
@@ -32,7 +31,7 @@ const DisplaySummary = ({reviews} : DisplaySummaryProps) => {
     return <div className={"w-full h-full pt-6 pb-6 flex flex-col gap-y-2 max-h-[60vh] overflow-y-auto"}>
         {
             reviews.map((review) => (
-                <DisplayReview key={review.id} questionName={review.question.title || review.question.type} response={review.response}/>
+                <DisplayReview key={review.id} questionName={review.question.title || review.question.type} response={JSON.stringify(review.response)}/>
             ))
         }
     </div>
