@@ -1,7 +1,6 @@
 import FormList from "@/components/form-list";
 import {getCurrentSession} from "@/lib/cookie";
 import {prisma} from "@/lib/db";
-import { Suspense } from "react";
 
 const DashboardPage = async () => {
 

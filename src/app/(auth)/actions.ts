@@ -55,14 +55,11 @@ export const SignupAction = async (state : FormState, formData : FormData) => {
 export const LogoutAction = async () => {
     try {
         const {user, session} = await getCurrentSession();
-
         await deleteSessionTokenCookie();
         await invalidateSession(session!.id);
-
     } catch (e) {
         console.log(e);
     }
-
     redirect("/")
 }
 
